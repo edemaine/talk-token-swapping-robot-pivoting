@@ -1,5 +1,9 @@
-# Talk: Token Swapping on Trees
+# Talk: Token Swapping and Robot Pivoting
 
+Based in part on 
+[these slides about Token Swapping on Trees](https://github.com/edemaine/talk-token-swapping-robot-pivoting).
+
+<!--
 This repository contains slides and animations for a talk about our 2021 paper
 "[Hardness of Token Swapping on Trees](https://arxiv.org/abs/2103.06707)"
 by Oswin Aichholzer, Erik Demaine, Matias Korman, Jayson Lynch, Anna Lubiw,
@@ -9,6 +13,7 @@ See the paper for more details about the results.
 ## [View Slides](https://edemaine.github.io/talk-token-swapping-in-trees/)
 
 [![Title slide](title_slide.jpg)](https://edemaine.github.io/talk-token-swapping-in-trees/)
+-->
 
 ## Technology: reveal.js + Pug + Stylus + CoffeeScript + SVG Tiler + SVG.js + KaTeX
 
