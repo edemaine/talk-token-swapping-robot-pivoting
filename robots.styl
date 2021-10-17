@@ -1,0 +1,62 @@
+:root
+  --bad-color: hsl(0,50%,30%)
+rect
+  &.robot, &.bad, &.empty
+    stroke-width: 0.1
+  &.robot
+    fill: grey
+    stroke: white
+    &.r1
+      fill: hsl(265, 80%, 60%)
+      stroke: hsl(265, 80%, 80%)
+  &.bad, &.empty
+    stroke: hsl(0,0%,25%)
+  &.bad
+    fill: url(#hatch) var(--bad-color)
+
+:root
+  --rotate-duration: 3s
+.rotate-90
+  animation: alternate linear infinite rotate-90 var(--rotate-duration)
+.rotate-90-1o2
+  animation: alternate linear infinite rotate-90-1o2 var(--rotate-duration)
+.rotate-90-2o2
+  animation: alternate linear infinite rotate-90-2o2 var(--rotate-duration)
+.rotate-180
+  animation: alternate linear infinite rotate-180 var(--rotate-duration)
+@keyframes rotate-90
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(0deg)
+  75%
+    transform: rotate(90deg)
+  100%
+    transform: rotate(90deg)
+@keyframes rotate-90-1o2
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(90deg)
+  100%
+    transform: rotate(90deg)
+@keyframes rotate-90-2o2
+  0%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(0deg)
+  75%
+    transform: rotate(90deg)
+  100%
+    transform: rotate(90deg)
+@keyframes rotate-180
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(0deg)
+  75%
+    transform: rotate(180deg)
+  100%
+    transform: rotate(180deg)

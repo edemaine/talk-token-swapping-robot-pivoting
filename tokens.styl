@@ -1,0 +1,43 @@
+svg.tokens
+  // Token colors.  Originally based on rainbow palette from
+  // https://loading.io/color/feature/Rainbow/, but modified for one more color.
+  .t1
+    fill: #e6261f
+  .t2
+    fill: #eb7532
+  .t3
+    fill: #f7d038
+  .t4
+    fill: #a3e048
+  .t5
+    fill: #49da9a
+  .t6
+    fill: #34bbe6
+  .t7
+    fill: #4355db
+  .t8
+    //fill: #d23be7
+    fill: #9f3be7
+  .t9
+    fill: #e634d0
+
+  // SVG styling
+  circle  // token
+    stroke: black
+    stroke-width: 3px
+    fill: #aaa
+  rect  // graph node
+    stroke: white
+    stroke-width: 3px
+    fill: #aaa
+  line  // graph edge
+    stroke: white
+    stroke-width: 10px
+    stroke-linecap: square
+  // Glows and drop shadow effects
+  circle
+    filter: drop-shadow(0px 0px 3px #000)
+  rect
+    filter: drop-shadow(0px 0px 4px #bbb)
+  line
+    filter: drop-shadow(0px 0px 4px #bbb)

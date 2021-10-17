@@ -25,11 +25,13 @@ html(nighteye="disabled")
     link(rel="stylesheet", href="node_modules/katex/dist/katex.css")
     style
       include:stylus index.styl
+      include:stylus tokens.styl
+      include:stylus robots.styl
   body
     .reveal
       .slides
-        include slides_tokens.pug
-        include slides_robots.pug
+        include tokens.pug
+        include robots.pug
     script
       :coffee-script
         Reveal.initialize

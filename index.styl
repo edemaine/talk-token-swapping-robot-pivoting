@@ -24,67 +24,53 @@
 //.reveal .slides section
 //  background: #111
 
+// Left-justify bullets
+ul, ol
+  width: calc(100% - 1em)  // account for 1em left margin
+  box-sizing: border-box
+
 // Formatting tools specific to this presentation
 cite
   color: #c0a5c0
-table.side-by-side
-  table-layout: fixed
-  td
-    width: 50%
-table.compact
-  td, th
-    padding: 0 0.5em
+  font-weight: normal
+  /h2 &
+    font-size: 85%
+.columns
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: space-between
+.column
+  text-align: center !important
+  max-height: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+  &.fill
+    flex-basis: 0
+    flex-grow: 1
+    align-self: stretch
+  &.space
+    width: 30px
+  &.arrow
+    font-size: 200%
+    &:before
+      content: '🡆'
+
+.text-center
+  text-align: center !important
+.vertical-middle
+  vertical-align: middle !important
+.d-inline-block
+  display: inline-block
 
 .invert
   filter: invert(1) hue-rotate(180deg)
 .url
   display: block
-  font-size: 30%
+  font-size: 40%
   font-family: monospace
 .sep
   display: inline-block
   color: #9a5b9a
   margin: 0 0.25em
-
-// Token colors.  Originally based on rainbow palette from
-// https://loading.io/color/feature/Rainbow/, but modified for one more color.
-.t1
-  fill: #e6261f
-.t2
-  fill: #eb7532
-.t3
-  fill: #f7d038
-.t4
-  fill: #a3e048
-.t5
-  fill: #49da9a
-.t6
-  fill: #34bbe6
-.t7
-  fill: #4355db
-.t8
-  //fill: #d23be7
-  fill: #9f3be7
-.t9
-  fill: #e634d0
-
-// SVG styling
-circle  // token
-  stroke: black
-  stroke-width: 3px
-  fill: #aaa
-rect  // graph node
-  stroke: white
-  stroke-width: 3px
-  fill: #aaa
-line  // graph edge
-  stroke: white
-  stroke-width: 10px
-  stroke-linecap: square
-// Glows and drop shadow effects
-circle
-  filter: drop-shadow(0px 0px 3px #000)
-rect
-  filter: drop-shadow(0px 0px 4px #bbb)
-line
-  filter: drop-shadow(0px 0px 4px #bbb)
