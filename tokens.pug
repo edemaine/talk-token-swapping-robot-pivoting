@@ -323,3 +323,85 @@ section
     circle.t2(cx="325", cy="25", r="16")
     circle.t3(cx="325", cy="125", r="16")
   //.tokenswap.fragment(data-fragment-index="1", data-swaps="2,4 2,6 2,1 1,5 3,6 3,5 4,5")
+
+section
+  h2 Reduction from Star Subseq.
+  ul
+    li Rephrasing/simplification of Garey &amp; Johnson's &ldquo;MS6: Permutation Generation&rdquo;:
+    ul
+      li Given tokens&rsquo; start/destination on <b>$\bm n$-star</b>
+      li Given <b>sequence</b> of edges (incident to center)
+      li Can you get from start to destination<br>via swaps that form a <b>subsequence</b>?
+  .columns.r-stretch
+    .column.fill.justify-content-center(style="flex-grow: 2")
+      svg.tokens(viewBox="-10 -10 270 170")
+        line(x1="50", y1="25", x2="100", y2="65")
+        line(x1="50", y1="125", x2="100", y2="85")
+        line(x1="200", y1="25", x2="150", y2="65")
+        line(x1="200", y1="125", x2="150", y2="85")
+        rect.t1(x="0", y="0", width="50", height="50")
+        rect.t3(x="0", y="100", width="50", height="50")
+        rect.t10(x="100", y="50", width="50", height="50")
+        rect.t5(x="200", y="0", width="50", height="50")
+        rect.t7(x="200", y="100", width="50", height="50")
+        circle.t7(cx="25", cy="25", r="16")
+        circle.t5(cx="25", cy="125", r="16")
+        circle.t10(cx="125", cy="75", r="16")
+        circle.t1(cx="225", cy="25", r="16")
+        circle.t3(cx="225", cy="125", r="16")
+      //.tokenswap.fragment(data-swaps="7,10 7,3 3,5 5,1 1,10")
+      .tokenswap.fragment(data-fragment-index=1, data-swaps="7,10")
+      .tokenswap.fragment(data-fragment-index=2, data-swaps="7,3")
+      .tokenswap.fragment(data-fragment-index=3, data-swaps="3,5")
+      .tokenswap.fragment(data-fragment-index=4, data-swaps="5,1")
+      .tokenswap.fragment(data-fragment-index=5, data-swaps="1,10")
+    .column.fill.justify-content-center
+      ol
+        li.fragment.highlight-green(data-fragment-index=1)
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t1(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+        li
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t3(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+        li
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t5(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+        li.fragment.highlight-green(data-fragment-index=2)
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t7(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+    .column.fill.justify-content-center
+      ol(start=5)
+        li.fragment.highlight-green(data-fragment-index=3)
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t3(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+        li
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t7(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+        li.fragment.highlight-green(data-fragment-index=4)
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t5(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+        li.fragment.highlight-green(data-fragment-index=5)
+          svg.tokens(viewBox="-10 -10 170 70", height="70px")
+            line(x1="50", y1="25", x2="100", y2="25")
+            rect.t1(x="0", y="0", width="50", height="50")
+            rect.t10(x="100", y="0", width="50", height="50")
+
+section
+  h2 0/1-Weighted Token Swapping
+  ul
+    li Each token $t$ has a weight $w(t) \in \{0,1\}$
+    li Cost of swapping $t \leftrightarrow t'$ is $w(t) + w(t')$
