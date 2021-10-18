@@ -265,3 +265,38 @@ section
       td PSPACE-hard
       td PSPACE-hard
       td PSPACE-hard
+
+section
+  h2 Hexagon Algorithm Overview
+  .columns.r-stretch
+    .column.fill
+      ul
+        li <u>Goal</u>: <b>Canonicalize</b> into vertical strip
+        li If there's a robot
+          ul
+            li on the outer shell
+            li whose removal preserves 2-connectivity
+          | we can move it directly to the vertical strip
+        li Otherwise, we need to make such a robot
+    .column.h-100.hexrobots#hexcanon.
+      . . . . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . O O .
+      . O O O .
+       O . O O
+      . O O O .
+       O O . O
+      . O . . .
+       O . . O
+      . . . . .
+       O . O O
+      . O O O .
+       . O O .
+      . . O . .
+       . . . .
+    .robotpivot.fragment(data-target="hexcanon", data-pivots="0.75,3.8971143170299736/120@0.75,3.8971143170299736")

@@ -94,7 +94,9 @@ rect, polygon
   100%
     transform: rotate(180deg)
 
-.robots > svg
+.robots > svg, .hexrobots > svg
   width: 100%
   flex-grow: 1
   overflow: visible  // for animation overflow
+  &:only-child
+    height: 100%
