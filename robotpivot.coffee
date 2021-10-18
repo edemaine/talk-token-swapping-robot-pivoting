@@ -107,7 +107,7 @@ animatePivots = (target, pivots, reverse) ->
         originX: center.x
         originY: center.y
       robot.animate(pivotDuration[Math.abs angle], pivotDelay, 'after')
-      .during (t) ->
+      .during do (robot) -> (t) ->
         unless robot.node.style.filter == "hue-rotate(90deg)"
           robot.node.style.filter = "hue-rotate(#{t * 90}deg)"
       .transform transform, true # relative to previous transformations
