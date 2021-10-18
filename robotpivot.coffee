@@ -2,6 +2,7 @@
 # Can specify multiple /...@... rotation actions
 
 pivotDuration =
+  60: 300
   90: 500
   120: 500
   180: 600
@@ -53,10 +54,17 @@ animatePivots = (target, pivots, reverse) ->
       x += parsed.x * hexX
       y += parsed.y * hexY
       {x, y}
-    simplify = (x) -> (Math.trunc(100*x)/100).toFixed 2
+    select = (x) ->
+      s = (Math.trunc(100*x)/100).toFixed 2
+      if s.endsWith '0'
+        s = s[...-1] while s.endsWith '0'
+        s = s[...-1] if s.endsWith '.'
+        "='#{s}'"
+      else
+        "^='#{s}'"
   else
     parseCoords = parseXY
-    simplify = (x) -> x.toFixed 0
+    select = (x) -> "='#{x.toFixed 0}'"
 
   pivots = pivots.split /\s+/
   pivots.reverse() if reverse
@@ -66,7 +74,7 @@ animatePivots = (target, pivots, reverse) ->
     [use, ...rotations] = pivot.split '/'
 
     use = parseCoords use
-    selector = "##{target} use[x^='#{simplify use.x}'][y^='#{simplify use.y}']"
+    selector = "##{target} use[x#{select use.x}][y#{select use.y}]"
     robot = SVG selector
     unless robot?
       console.warn "Failed to select #{selector}"

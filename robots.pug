@@ -354,3 +354,29 @@ section(data-transition="fade")
       . . O . .
        . . . .
     .robotpivot.fragment(data-fragment-index=1, data-target="hexcanon", data-pivots="1,9/120@TR1,9/120@R1,7/120@R2,6/120@TR3,5/120@TR3,3/120@R3,1")
+
+section
+  h2 Hexagon Algorithm: Step 1
+  ul
+    li Remove degree-1 vertices
+  .hexrobots.r-stretch#remove-leaves.
+    . . . . .
+     . O O . .
+    . O O O .
+     . . . . .
+    . O 1 O 1
+     O . . O .
+    . . . . .
+     O . . O .
+    . O . O .
+     . . . O .
+    . O O O .
+     . O . . .
+    . . O . .
+     . . . . .
+  .robotpivot.fragment(data-target="remove-leaves", data-pivots="8,4/120@BL8,4")
+  .robotpivot.fragment(data-target="remove-leaves", data-pivots="4,4/60@TL4,4/60@TL3,5")
+  //-.robotpivot.fragment(data-target="remove-leaves", data-pivots="4,4/60@L3,5/60@L3,7")
+  //-.robotpivot.fragment(data-target="remove-leaves", data-pivots="4,4/60@BL3,7/60@BL4,8/60@BR4,8/60@BR5,7/60@R5,7/60@R5,5/60@TR5,5/60@TR4,4")
+  .robotpivot.fragment(data-target="remove-leaves", data-pivots="4,4/60@L3,5/60@L3,7/60@BL3,7/60@BL4,8")
+  .robotpivot.fragment(data-target="remove-leaves", data-pivots="4,4/60@BR4,8/60@BR5,7 4,10/-120@L4,10 4,4/-120@BR5,7")
