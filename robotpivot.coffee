@@ -111,8 +111,8 @@ animatePivots = (target, pivots, reverse) ->
         unless robot.node.style.filter == "hue-rotate(90deg)"
           robot.node.style.filter = "hue-rotate(#{t * 90}deg)"
       .transform transform, true # relative to previous transformations
+      transforms[id] = transforms[id].transform transform
       unless i < rotations.length-1 and rotations[i+1][1] == centerString
-        transforms[id] = transforms[id].transform transform
         pivotCenter.animate pivotFade, 0, 'after'
         .opacity 0
 
