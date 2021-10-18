@@ -27,12 +27,12 @@ animatePivots = (target, pivots, reverse) ->
     [use, ...rotations] = pivot.split '/'
 
     use = parseCoords use
-    id = "#{use.x},#{use.y}"
     robot = SVG "##{target} use[x='#{use.x}'][y='#{use.y}']"
     unless robot?
       console.warn "Failed to find ##{target} use[x='#{use.x}'][y='#{use.y}']"
       continue
     robot.timeline timeline
+    id = "#{use.x},#{use.y}"
     transforms[id] ?= new SVG.Matrix robot.transform()
 
     rotations.reverse() if reverse
@@ -52,6 +52,9 @@ animatePivots = (target, pivots, reverse) ->
         originX: center.x
         originY: center.y
       robot.animate(pivotDuration[Math.abs angle], pivotDelay, 'after')
+      .during (t) ->
+        unless robot.node.style.filter == "hue-rotate(90deg)"
+          robot.node.style.filter = "hue-rotate(#{t * 90}deg)"
       .transform transform, true # relative to previous transformations
       transforms[id] = transforms[id].transform transform
 
