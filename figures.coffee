@@ -1,4 +1,7 @@
-window.addEventListener 'DOMContentLoaded', ->
+# This rendering needs to happen before any .robotpivot.fragment,
+# so we call it before Reveal.initialize() in index.pug.
+#window.addEventListener 'DOMContentLoaded', ->
+window.renderFigures = ->
   square = (className) ->
     if className.startsWith 'robot'
       z = 1
