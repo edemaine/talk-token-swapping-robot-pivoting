@@ -21,8 +21,9 @@
     visibility: inherit
 
 // For debugging slide size, uncomment the following:
-//.reveal .slides section
-//  background: #111
+.reveal .slides section
+  background: #111
+  height: 100%
 
 // Left-justify bullets
 ul, ol
@@ -64,12 +65,19 @@ cite
     &:before
       content: '🡆'
 
+// Bootstrap helpers
 .text-center
   text-align: center !important
 .vertical-middle
   vertical-align: middle !important
 .d-inline-block
   display: inline-block
+.justify-content-center
+  justify-content: center
+.justify-content-between
+  justify-content: space-between
+.justify-content-evenly
+  justify-content: space-evenly
 
 .invert
   filter: invert(1) hue-rotate(180deg)
