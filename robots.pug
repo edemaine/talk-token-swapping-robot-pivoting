@@ -141,7 +141,7 @@ section
   h2 Hexagon Pivoting Models
   .columns.r-stretch
     .column.fill
-      svg(viewBox="-2 -2 4 4")
+      svg(viewBox=`${-hexX-0.5-0.1} ${-2*hexY-0.1} ${2*hexX+1+0.2} ${6*hexY+0.2}`)
         polygon.bad(points=hex)
         polygon.bad(points=hex, transform=`translate(${hexX},${-hexY})`)
         polygon.bad(points=hex, transform=`translate(${hexX},${hexY})`)
@@ -150,8 +150,9 @@ section
         polygon.robot(points=hex, transform=`translate(${-hexX},${hexY})`)
         polygon.robot.r1.rotate-120(points=hex, style=`transform-origin: -0.25px ${hexY}px`)
       p Restricted move
+    .column.space
     .column.fill
-      svg(viewBox="-2 -2 4 4")
+      svg(viewBox=`${-hexX-0.5-0.1} ${-2*hexY-0.1} ${2*hexX+1+0.2} ${6*hexY+0.2}`)
         polygon.bad(points=hex)
         polygon.bad(points=hex, transform=`translate(${hexX},${-hexY})`)
         polygon.bad(points=hex, transform=`translate(${hexX},${hexY})`)
@@ -161,3 +162,31 @@ section
         g.rotate-60-2o2(style=`transform-origin:${-0.25+hexX}px ${2*hexY}px`)
           polygon.robot.r1.rotate-60-1o2(points=hex, style=`transform-origin: -0.25px ${hexY}px`)
       p Monkey move
+
+section
+  h2 Known Results: Hexagons
+  ul
+    li Restricted moves are <b>universal</b> if no <b>forbidden pattern</b>
+      cite [Nguyen, Guibas, Kim 2001]
+  .columns.r-stretch
+    .column.fill
+      svg(viewBox=`${-hexX-0.5-0.1} ${-2*hexY-0.1} ${2*hexX+1+0.2} ${6*hexY+0.2}`)
+        polygon.bad(points=hex)
+        polygon.bad(points=hex, transform=`translate(${hexX},${-hexY})`)
+        polygon.bad(points=hex, transform=`translate(${hexX},${hexY})`)
+        polygon.bad(points=hex, transform=`translate(${hexX},${3*hexY})`)
+        polygon.bad(points=hex, transform=`translate(${0},${2*hexY})`)
+        polygon.robot(points=hex, transform=`translate(${-hexX},${hexY})`)
+        polygon.robot.r1.rotate-120(points=hex, style=`transform-origin: -0.25px ${hexY}px`)
+      p Restricted move
+    .column.fill
+      svg(viewBox=`${-hexX-0.5-0.1} ${-2*hexY-0.1} ${2*hexX+1+0.2} ${6*hexY+0.2}`)
+        polygon.bad(points=hex, transform=`translate(${0}, ${hexY})`)
+        polygon.robot(points=hex, transform=`translate(${-hexX},${0})`)
+        polygon.robot(points=hex, transform=`translate(${hexX},${2*hexY})`)
+      p Forbidden pattern
+
+section
+  h2 Known Results: Squares
+  ul
+    li Restricted moves suffice for universal reconfiguration if no <b>forbidden pattern</b> [Nguyen et al. 2001]
