@@ -132,3 +132,32 @@ section
           g.rotate-90-2o2(style="transform-origin: 2px 1px")
             rect.robot.r1.rotate-90-1o2(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
       p Monkey<br>move
+
+- hexX = 1.5/2
+- hexY = Math.sin(Math.PI*4/6)/2   // 0.8660254037844386/2
+- hex = `0.5,0 0.25,${hexY} -0.25,${hexY} -0.5,0 -0.25,${-hexY} 0.25,${-hexY}`
+
+section
+  h2 Hexagon Pivoting Models
+  .columns.r-stretch
+    .column.fill
+      svg(viewBox="-2 -2 4 4")
+        polygon.bad(points=hex)
+        polygon.bad(points=hex, transform=`translate(${hexX},${-hexY})`)
+        polygon.bad(points=hex, transform=`translate(${hexX},${hexY})`)
+        polygon.bad(points=hex, transform=`translate(${hexX},${3*hexY})`)
+        polygon.bad(points=hex, transform=`translate(${0},${2*hexY})`)
+        polygon.robot(points=hex, transform=`translate(${-hexX},${hexY})`)
+        polygon.robot.r1.rotate-120(points=hex, style=`transform-origin: -0.25px ${hexY}px`)
+      p Restricted move
+    .column.fill
+      svg(viewBox="-2 -2 4 4")
+        polygon.bad(points=hex)
+        polygon.bad(points=hex, transform=`translate(${hexX},${-hexY})`)
+        polygon.bad(points=hex, transform=`translate(${hexX},${hexY})`)
+        polygon.bad(points=hex, transform=`translate(${0},${2*hexY})`)
+        polygon.robot(points=hex, transform=`translate(${hexX},${3*hexY})`)
+        polygon.robot(points=hex, transform=`translate(${-hexX},${hexY})`)
+        g.rotate-60-2o2(style=`transform-origin:${-0.25+hexX}px ${2*hexY}px`)
+          polygon.robot.r1.rotate-60-1o2(points=hex, style=`transform-origin: -0.25px ${hexY}px`)
+      p Monkey move

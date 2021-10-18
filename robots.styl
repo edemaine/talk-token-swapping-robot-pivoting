@@ -1,6 +1,6 @@
 :root
   --bad-color: hsl(0,50%,40%)
-rect
+rect, polygon
   &.robot, &.bad, &.empty
     stroke-width: 0.1
   &.robot
@@ -16,14 +16,38 @@ rect
 
 :root
   --rotate-duration: 3s
+.rotate-60-1o2
+  animation: alternate linear infinite rotate-60-1o2 var(--rotate-duration)
+.rotate-60-2o2
+  animation: alternate linear infinite rotate-60-2o2 var(--rotate-duration)
 .rotate-90
   animation: alternate linear infinite rotate-90 var(--rotate-duration)
 .rotate-90-1o2
   animation: alternate linear infinite rotate-90-1o2 var(--rotate-duration)
 .rotate-90-2o2
   animation: alternate linear infinite rotate-90-2o2 var(--rotate-duration)
+.rotate-120
+  animation: alternate linear infinite rotate-120 var(--rotate-duration)
 .rotate-180
   animation: alternate linear infinite rotate-180 var(--rotate-duration)
+@keyframes rotate-60-1o2
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(60deg)
+  100%
+    transform: rotate(60deg)
+@keyframes rotate-60-2o2
+  0%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(0deg)
+  75%
+    transform: rotate(60deg)
+  100%
+    transform: rotate(60deg)
 @keyframes rotate-90
   0%
     transform: rotate(0deg)
@@ -51,6 +75,15 @@ rect
     transform: rotate(90deg)
   100%
     transform: rotate(90deg)
+@keyframes rotate-120
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(0deg)
+  75%
+    transform: rotate(120deg)
+  100%
+    transform: rotate(120deg)
 @keyframes rotate-180
   0%
     transform: rotate(0deg)
