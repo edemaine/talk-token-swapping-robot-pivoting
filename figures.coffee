@@ -22,6 +22,7 @@ window.renderFigures = ->
     new svgtiler.Mapping
       O: construct 'robot'
       1: construct 'robot r1'
+      2: construct 'robot r2'
       x: construct 'bad'
       '.': construct 'empty'
       ' ': construct()

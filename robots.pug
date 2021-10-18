@@ -386,3 +386,39 @@ section
   .r-stretch
     img.big.invert(src="degree1.svg")
     div(style="position: absolute; left: 0.5em; top: 0.5em;") Case analysis
+
+section
+  h2 Hexagon Algorithm: Step 2
+  ul
+    li <b>2-connected components</b> connected by <b>bridges</b>
+    li <b>Merge</b> leaf 2-connected component into others
+  .hexrobots.r-stretch#merge-leaf.
+    . . . . . . . . 
+     . . . . . . . .
+    . . . . . . 1 . 
+     . . . . . 1 . .
+    . . . . . . 1 . 
+     . . . . . 1 . .
+    . . O . O . 1 . 
+     . O O O O . . .
+    . O . O . O 2 . 
+     . . . . . O . .
+    . O . O O O . . 
+     2 O O O O . 1 .
+    . . O . . . 1 1 
+     1 . . . 2 1 . .
+    . 1 . . . . 1 1 
+     1 1 . . 2 1 . .
+    . 1 . . . 2 1 1 
+     . . . . . . 1 .
+    . . . . . . . . 
+  .robotpivot.fragment(data-target="merge-leaf", data-pivots="2,16/-120@R2,16/-120@TR3,17/-120@TL4,16")
+  .robotpivot.fragment(data-target="merge-leaf", data-pivots="12,2/-120@L12,2/-120@BL11,1/-120@BR10,2/-60@BR10,4/-60@BR9,5")
+  .robotpivot.fragment(data-target="merge-leaf", data-pivots="11,3/-120@BL11,3")
+  .robotpivot.fragment(data-target="merge-leaf", data-pivots="13,11/-60@L13,11/-60@L13,9 12,12/60@BR12,12/60@BR13,11")
+
+section
+  //h2 Hexagon Algorithm: Step 2
+  .r-stretch
+    img.big.invert(src="merge-example.svg")
+    div(style="position: absolute; left: 0.5em; top: 30.5%;") Merge procedure
