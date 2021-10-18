@@ -238,3 +238,26 @@ section
           rect.robot(x=0, y=1, width=1, height=1)
           rect.robot(x=2, y=0, width=1, height=1)
       p Forbidden patterns
+
+section
+  h2 Our Results
+  ul
+    li No forbidden patterns or extra robots
+  p
+  table
+    tr
+      th Model:
+      th Restricted
+      th Restricted + Leapfrog
+      th Restricted + Leapfrog + Monkey
+    tr
+      th Hexagons
+      td PSPACE-hard
+      td N/A
+      td Universal:
+        span(style="font-size: 90%") $O(n^3)$ moves
+    tr
+      th Squares
+      td PSPACE-hard
+      td PSPACE-hard
+      td PSPACE-hard
