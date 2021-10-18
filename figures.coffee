@@ -1,3 +1,7 @@
+# Also used in robotpivot.coffee
+window.hexX = 1.5/2
+window.hexY = Math.sin(Math.PI*4/6)/2   # 0.8660254037844386/2
+
 # This rendering needs to happen before any .robotpivot.fragment,
 # so we call it before Reveal.initialize() in index.pug.
 #window.addEventListener 'DOMContentLoaded', ->
@@ -5,7 +9,10 @@ window.renderFigures = ->
   zIndex = (className) ->
     if className?
       if className?.startsWith 'robot'
-        1
+        if className == 'robot'
+          1
+        else
+          2
       else
         0
     else
@@ -29,8 +36,6 @@ window.renderFigures = ->
     filename: 'robots.asc'
     keepParent: true
 
-  hexX = 1.5/2
-  hexY = Math.sin(Math.PI*4/6)/2   # 0.8660254037844386/2
   hexagon = (className) ->
     """
       <symbol viewBox="#{-hexX/2} #{-hexY} #{hexX} #{hexY}" overflowBox="#{-0.5-0.1} #{-hexY-0.1} #{2*(0.5+0.1)} #{2*(hexY+0.1)}" z-index="#{zIndex className}">
@@ -46,4 +51,5 @@ window.renderFigures = ->
     symbol.id = "h#{symbol.id}"
   for use in document.querySelectorAll '.hexrobots > svg > use'
     use.setAttribute 'href', "#h#{use.getAttribute('href')[1..]}"
+
   undefined

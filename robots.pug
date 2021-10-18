@@ -271,13 +271,41 @@ section
   .columns.r-stretch
     .column.fill
       ul
-        li <u>Goal</u>: <b>Canonicalize</b> into vertical strip
+        li <u>Goal</u>: <b>Canonicalize</b><br>into vertical strip
+    .column.h-100.hexrobots.
+      . . . . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+
+section(data-transition="fade")
+  h2 Hexagon Algorithm Overview
+  .columns.r-stretch
+    .column.fill
+      ul
+        li <u>Goal</u>: <b>Canonicalize</b><br>into vertical strip
         li If there's a robot
           ul
-            li on the outer shell
-            li whose removal preserves 2-connectivity
-          | we can move it directly to the vertical strip
-        li Otherwise, we need to make such a robot
+            li on the outer shell,
+            li whose removal preserves 2-connectivity,
+          | then can pivot robot directly to vertical strip
+        li.fragment Otherwise, we need to make such a robot
     .column.h-100.hexrobots#hexcanon.
       . . . . .
        . . . .
@@ -288,7 +316,7 @@ section
       . . O . .
        . O O .
       . O O O .
-       O . O O
+       1 . O O
       . O O O .
        O O . O
       . O . . .
@@ -299,4 +327,4 @@ section
        . O O .
       . . O . .
        . . . .
-    .robotpivot.fragment(data-target="hexcanon", data-pivots="0.75,3.8971143170299736/120@0.75,3.8971143170299736")
+    .robotpivot.fragment(data-fragment-index=1, data-target="hexcanon", data-pivots="1,9/120@TR1,9/120@R1,7/120@R2,6/120@TR3,5/120@TR3,3/120@R3,1")

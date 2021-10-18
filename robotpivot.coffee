@@ -11,7 +11,7 @@ pivotRadius = 0.3
 
 timeline = null
 
-parseCoords = (coords) ->
+parseXY = (coords) ->
   [x, y] = coords.split ','
   x = parseFloat x
   y = parseFloat y
@@ -19,14 +19,42 @@ parseCoords = (coords) ->
     console.warn "Invalid coordinates #{coords}"
   {x, y}
 
+hexCorners =
+  C: {x: hexX/2, y: hexY}  # negative of first two entries of hexagon viewBox
+  # All remaining corners are relative to the center above:
+  R: {x: 0.5, y: 0}
+  BR: {x: 0.25, y: hexY}
+  BL: {x: -0.25, y: hexY}
+  L: {x: -0.5, y: 0}
+  TL: {x: -0.25, y: -hexY}
+  TR: {x: 0.25, y: -hexY}
+
 animatePivots = (target, pivots, reverse) ->
   timeline?.finish()
   timeline = new SVG.Timeline
+  root = document.getElementById target
   svg = SVG "##{target} > svg"
   pivotCenter = svg.circle pivotRadius
   .addClass 'pivotCenter'
   .opacity 0
   .timeline timeline
+  if root.classList.contains 'hexrobots'
+    parseCoords = (coords) ->
+      if (match = /^(T|B)?(L|R)|C/.exec coords)?
+        {x, y} = hexCorners[match[0]]
+        coords = coords[match[0].length..]
+        x += hexCorners.C.x
+        y += hexCorners.C.y
+      else
+        x = y = 0
+      parsed = parseXY coords
+      x += parsed.x * hexX
+      y += parsed.y * hexY
+      {x, y}
+    simplify = (x) -> (Math.trunc(100*x)/100).toFixed 2
+  else
+    parseCoords = parseXY
+    simplify = (x) -> x.toFixed 0
 
   pivots = pivots.split /\s+/
   pivots.reverse() if reverse
@@ -36,9 +64,10 @@ animatePivots = (target, pivots, reverse) ->
     [use, ...rotations] = pivot.split '/'
 
     use = parseCoords use
-    robot = SVG "##{target} use[x='#{use.x}'][y='#{use.y}']"
+    selector = "##{target} use[x^='#{simplify use.x}'][y^='#{simplify use.y}']"
+    robot = SVG selector
     unless robot?
-      console.warn "Failed to find ##{target} use[x='#{use.x}'][y='#{use.y}']"
+      console.warn "Failed to select #{selector}"
       continue
     robot.timeline timeline
     id = "#{use.x},#{use.y}"
