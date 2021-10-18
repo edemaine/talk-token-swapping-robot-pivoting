@@ -326,12 +326,13 @@ section(data-transition="fade")
     .column.fill
       ul
         li <u>Goal</u>: <b>Canonicalize</b><br>into vertical strip
+        p
         li If there's a robot
           ul
-            li on the outer shell,
-            li whose removal preserves 2-connectivity,
+            li on the <b>outer shell</b>,
+            li whose removal <b>preserves connectivity</b>,
           | then can pivot robot directly to vertical strip
-        li.fragment Otherwise, we need to make such a robot
+        li.fragment Otherwise, we need to make such a robot&hellip;
     .column.h-100.hexrobots#hexcanon.
       . . . . .
        . . . .
@@ -356,7 +357,7 @@ section(data-transition="fade")
     .robotpivot.fragment(data-fragment-index=1, data-target="hexcanon", data-pivots="1,9/120@TR1,9/120@R1,7/120@R2,6/120@TR3,5/120@TR3,3/120@R3,1")
 
 section
-  h2 Hexagon Algorithm: Step 1
+  h2 Hexagon Algorithm: Phase 1
   ul
     li Remove degree-1 vertices
   .hexrobots.r-stretch#remove-leaves.
@@ -382,13 +383,13 @@ section
   .robotpivot.fragment(data-target="remove-leaves", data-pivots="4,4/60@BR4,8/60@BR5,7 4,10/-120@L4,10 4,4/-120@BR5,7")
 
 section
-  //h2 Hexagon Algorithm: Step 1
+  //h2 Hexagon Algorithm: Phase 1
   .r-stretch
     img.big.invert(src="degree1.svg")
     div(style="position: absolute; left: 0.5em; top: 0.5em;") Case analysis
 
 section
-  h2 Hexagon Algorithm: Step 2
+  h2 Hexagon Algorithm: Phase 2
   ul
     li <b>2-connected components</b> connected by <b>bridges</b>
     li <b>Merge</b> leaf 2-connected component into others
@@ -418,7 +419,57 @@ section
   .robotpivot.fragment(data-target="merge-leaf", data-pivots="13,11/-60@L13,11/-60@L13,9 12,12/60@BR12,12/60@BR13,11")
 
 section
-  //h2 Hexagon Algorithm: Step 2
+  //h2 Hexagon Algorithm: Phase 2
   .r-stretch
     img.big.invert(src="merge-example.svg")
     div(style="position: absolute; left: 0.5em; top: 30.5%;") Merge procedure
+
+section
+  h2 Hexagon Algorithm: Phase 3
+  .columns.r-stretch
+    .column.fill
+      ul
+        li Now 2-connected
+        li Using a modified merge procedure, can produce a robot
+          ul
+            li on the outer shell,
+            li whose removal <b>preserves 2-connectivity</b>
+        li Pivot robot directly to vertical strip
+    .column.h-100.hexrobots#phase3.
+      . . . . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . . . .
+      . . O . .
+       . O O .
+      . O O O .
+       1 . O O
+      . O O O .
+       O O . O
+      . O . . .
+       O . . O
+      . . . . .
+       O . O O
+      . O O O .
+       . O O .
+      . . O . .
+       . . . .
+    .robotpivot.fragment(data-target="phase3", data-pivots="1,9/120@TR1,9/120@R1,7/120@R2,6/120@TR3,5/120@TR3,3/120@R3,1")
+
+section
+  h2 Hexagon Algorithm Analysis
+  ul
+    li <u>Phase 1</u> (leaf removal): $O(n^2)$ moves
+    li <u>Phase 2</u> (merging 2-connected components):
+      ul
+        li $O(n^2)$ moves per 2-connected component
+        li $\Rightarrow O(n^3)$ overall
+    li <u>Phase 3</u> (canonicalization):
+      ul
+        li $O(n^2)$ moves per robot $\Rightarrow O(n^3)$ overall
+        li $\Rightarrow O(n^3)$ moves overall
+    li $\Rightarrow O(n^3)$ moves overall
+    p
+    li.fragment <u>OPEN</u>: Do $O(n^2)$ moves suffice?
