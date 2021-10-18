@@ -3,8 +3,10 @@
 
 pivotDuration =
   90: 500
+  120: 500
   180: 600
 pivotDelay = 100
+pivotRadius = 0.3
 
 timeline = null
 
@@ -17,11 +19,16 @@ parseCoords = (coords) ->
   {x, y}
 
 animatePivots = (target, pivots, reverse) ->
+  timeline?.finish()
+  timeline = new SVG.Timeline
+  svg = SVG "##{target} > svg"
+  pivotCenter = svg.circle pivotRadius
+  .addClass 'pivotCenter'
+  .timeline timeline
+
   pivots = pivots.split /\s+/
   pivots.reverse() if reverse
   transforms = {}
-  timeline?.finish()
-  timeline = new SVG.Timeline
   for pivot in pivots
     continue unless pivot
     [use, ...rotations] = pivot.split '/'
@@ -44,6 +51,10 @@ animatePivots = (target, pivots, reverse) ->
         continue
       angle = -angle if reverse
       center = parseCoords center
+      pivotCenter.animate(0.1, 0, 'after')
+      .attr
+        cx: center.x
+        cy: center.y
       center = new SVG.Point center
       .transform transforms[id].inverse()
       ## Pivot
@@ -57,6 +68,10 @@ animatePivots = (target, pivots, reverse) ->
           robot.node.style.filter = "hue-rotate(#{t * 90}deg)"
       .transform transform, true # relative to previous transformations
       transforms[id] = transforms[id].transform transform
+
+  pivotCenter.animate 0.1, 0, 'last'
+  .opacity 0
+  .after -> pivotCenter.remove()
 
 Reveal.on 'fragmentshown', (e) ->
   return unless e.fragment.classList.contains 'robotpivot'
