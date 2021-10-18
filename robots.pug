@@ -189,4 +189,52 @@ section
 section
   h2 Known Results: Squares
   ul
-    li Restricted moves suffice for universal reconfiguration if no <b>forbidden pattern</b> [Nguyen et al. 2001]
+    li Restricted moves are <b>universal</b> if no <b>forbidden pattern</b>
+      cite [Sung, Bern, Romanishin, Rus 2015]
+    li.fragment Restricted moves are <b>universal</b> given 5 <b>extra robots</b> on external boundary
+      cite [Akitaya, Arkin, Damian, Demaine, Dujmović, Flatland, Korman, Palop, Parada, van Renssen, Sacristán 2019]
+  .columns.r-stretch
+    .column
+      .columns
+        svg.column(viewBox="-0.1 -0.1 2.2 3.2", style="height: 200px")
+          rect.bad(x=0, y=0, width=1, height=1)
+          rect.bad(x=1, y=0, width=1, height=1)
+          rect.bad(x=0, y=1, width=1, height=1)
+          rect.bad(x=1, y=1, width=1, height=1)
+          rect.robot(x=0, y=2, width=1, height=1)
+          rect.robot(x=1, y=2, width=1, height=1)
+          rect.robot.r1.rotate-90(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+        .column.space
+        svg.column(viewBox="-0.1 -0.1 3.2 3.2", style="height: 200px")
+          rect.bad(x=0, y=0, width=1, height=1)
+          rect.bad(x=1, y=0, width=1, height=1)
+          rect.empty(x=2, y=0, width=1, height=1)
+          rect.bad(x=0, y=1, width=1, height=1)
+          rect.bad(x=1, y=1, width=1, height=1)
+          rect.bad(x=2, y=1, width=1, height=1)
+          rect.bad(x=1, y=2, width=1, height=1)
+          rect.bad(x=2, y=2, width=1, height=1)
+          rect.robot(x=0, y=2, width=1, height=1)
+          rect.robot.r1.rotate-180(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+      p Restricted moves
+    .column
+      .columns
+        svg.column(viewBox="-0.1 -0.1 2.2 2.2", style="height: 133.333px")
+          rect.bad(x=0, y=0, width=1, height=1)
+          rect.bad(x=1, y=1, width=1, height=1)
+          rect.robot(x=0, y=1, width=1, height=1)
+          rect.robot(x=1, y=0, width=1, height=1)
+        .column.space
+        svg.column(viewBox="-0.1 -0.1 3.2 1.2", style="height: 66.666px")
+          rect.bad(x=0, y=0, width=1, height=1)
+          rect.bad(x=2, y=0, width=1, height=1)
+          rect.robot(x=1, y=0, width=1, height=1)
+        .column.space
+        svg.column(viewBox="-0.1 -0.1 3.2 2.2", style="height: 133.333px")
+          rect.bad(x=0, y=0, width=1, height=1)
+          rect.bad(x=1, y=0, width=1, height=1)
+          rect.bad(x=1, y=1, width=1, height=1)
+          rect.bad(x=2, y=1, width=1, height=1)
+          rect.robot(x=0, y=1, width=1, height=1)
+          rect.robot(x=2, y=0, width=1, height=1)
+      p Forbidden patterns

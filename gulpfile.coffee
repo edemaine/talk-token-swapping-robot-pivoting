@@ -51,10 +51,12 @@ deploySet = [
   './node_modules/@fontsource/merriweather/latin-400-italic.css'
   './node_modules/@fontsource/merriweather/latin-900.css'
   './node_modules/@fontsource/merriweather/latin-900-italic.css'
+  './node_modules/@fontsource/merriweather/latin-ext-400-italic.css'
   './node_modules/@fontsource/merriweather/files/merriweather-latin-400-normal.woff2'
   './node_modules/@fontsource/merriweather/files/merriweather-latin-400-italic.woff2'
   './node_modules/@fontsource/merriweather/files/merriweather-latin-900-normal.woff2'
   './node_modules/@fontsource/merriweather/files/merriweather-latin-900-italic.woff2'
+  './node_modules/@fontsource/merriweather/files/merriweather-latin-ext-400-italic.woff2'
 ]
 
 ## npm run build / npx gulp: build index.html and yinyang.js
