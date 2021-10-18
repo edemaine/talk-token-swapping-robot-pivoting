@@ -6,6 +6,7 @@ pivotDuration =
   120: 500
   180: 600
 pivotDelay = 100
+pivotFade = 100
 pivotRadius = 0.3
 
 timeline = null
@@ -24,6 +25,7 @@ animatePivots = (target, pivots, reverse) ->
   svg = SVG "##{target} > svg"
   pivotCenter = svg.circle pivotRadius
   .addClass 'pivotCenter'
+  .opacity 0
   .timeline timeline
 
   pivots = pivots.split /\s+/
@@ -43,18 +45,21 @@ animatePivots = (target, pivots, reverse) ->
     transforms[id] ?= new SVG.Matrix robot.transform()
 
     rotations.reverse() if reverse
-    for rotation in rotations
-      [angle, center] = rotation.split '@'
+    rotations = (rotation.split '@' for rotation in rotations)
+    for [angle, centerString], i in rotations
       angle = parseFloat angle
       if isNaN angle
         console.warn "Invalid angle #{angle}"
         continue
       angle = -angle if reverse
-      center = parseCoords center
-      pivotCenter.animate(0.1, 0, 'after')
-      .attr
-        cx: center.x
-        cy: center.y
+      center = parseCoords centerString
+      unless i > 0 and rotations[i-1][1] == centerString
+        pivotCenter.animate 0.1, 0, 'after'
+        .attr
+          cx: center.x
+          cy: center.y
+        pivotCenter.animate pivotFade, 0, 'after'
+        .opacity 1
       center = new SVG.Point center
       .transform transforms[id].inverse()
       ## Pivot
@@ -67,10 +72,12 @@ animatePivots = (target, pivots, reverse) ->
         unless robot.node.style.filter == "hue-rotate(90deg)"
           robot.node.style.filter = "hue-rotate(#{t * 90}deg)"
       .transform transform, true # relative to previous transformations
-      transforms[id] = transforms[id].transform transform
+      unless i < rotations.length-1 and rotations[i+1][1] == centerString
+        transforms[id] = transforms[id].transform transform
+        pivotCenter.animate pivotFade, 0, 'after'
+        .opacity 0
 
   pivotCenter.animate 0.1, 0, 'last'
-  .opacity 0
   .after -> pivotCenter.remove()
 
 Reveal.on 'fragmentshown', (e) ->
