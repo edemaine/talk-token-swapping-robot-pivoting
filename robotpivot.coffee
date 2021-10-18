@@ -33,6 +33,8 @@ animatePivots = (target, pivots, reverse) ->
   timeline?.finish()
   timeline = new SVG.Timeline
   root = document.getElementById target
+  unless root?
+    return console.warn "Invalid target #{target}"
   svg = SVG "##{target} > svg"
   pivotCenter = svg.circle pivotRadius
   .addClass 'pivotCenter'

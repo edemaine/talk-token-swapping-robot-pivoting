@@ -31,7 +31,9 @@ section
   h2 Reconfiguration by Pivots
   ul
     li Given two configurations of $n$ <b>robots/modules</b>
-    li Reconfigure via a sequence of <b>pivots</b>
+    li.fragment(data-fragment-index=1) Reconfigure via a sequence of <b>pivots</b>
+    li.fragment Maintain <b>connectivity</b> <i>throughout</i>
+      div(style="font-size: 80%") (including during pivot, except for the pivoted robot)
   .columns.r-stretch
     .column.fill.robots.
       .....
@@ -42,7 +44,7 @@ section
       .OOO.
       .....
     .column.arrow
-    .column.fill.robots#anim69.
+    .column.fill.fragment.robots#anim69(data-fragment-index=1).
       .....
       .OOO.
       .O...
@@ -60,10 +62,10 @@ section
       .OOO.
       .....
     div(data-target="anim69")
-    .robotpivot.fragment(data-target="anim69", data-pivots="1,5/-180@2,6/-90@3,6/-180@4,6/-90@4,5/-90@4,4")
-    .robotpivot.fragment(data-target="anim69", data-pivots="1,5/-180@4,3/180@4,3")
-    .robotpivot.fragment(data-target="anim69", data-pivots="3,1/-180@3,1 1,5/-180@4,3 3,1/180@3,1")
-    .robotpivot.fragment(data-target="anim69", data-pivots="1,4/-90@2,5")
+    .robotpivot.fragment(data-fragment-index=2, data-target="anim69", data-pivots="1,5/-180@2,6/-90@3,6/-180@4,6/-90@4,5/-90@4,4")
+    .robotpivot.fragment(data-fragment-index=3, data-target="anim69", data-pivots="1,5/-180@4,3/180@4,3")
+    .robotpivot.fragment(data-fragment-index=4, data-target="anim69", data-pivots="3,1/-180@3,1 1,5/-180@4,3 3,1/180@3,1")
+    .robotpivot.fragment(data-fragment-index=5, data-target="anim69", data-pivots="1,4/-90@2,5")
 
 - squareMoveSize = 'height: 250px'
 
@@ -265,6 +267,30 @@ section
       td PSPACE-hard
       td PSPACE-hard
       td PSPACE-hard
+
+section
+  h2 Hexagon Model Intuition
+  ul
+    li Some configurations are <b>rigid</b> under restricted moves
+      cite [Nguyen, Guibas, Kim 2001]
+    li.fragment(data-fragment-index=4) Monkey moves unlock these examples
+  .hexrobots.r-stretch#rigidhex.
+     . . . . . . O . 
+    . . . . . . O O .
+     . . . . . O . O 
+    . O . . . . . . .
+     O O . O O O O O 
+    . . . O O O . . .
+     O O O . . . O O 
+    . . . . . . . O .
+     O . O . . . . . 
+    . O O . . . . . .
+     . O . . . . . . 
+    . . . . . . . . .
+  .robotpivot.fragment(data-fragment-index=1, data-target="rigidhex", data-pivots="5,6/120@TR5,6/-120@TR5,6")
+  .robotpivot.fragment(data-fragment-index=2, data-target="rigidhex", data-pivots="3,6/120@TL3,6/-120@TL3,6")
+  .robotpivot.fragment(data-fragment-index=3, data-target="rigidhex", data-pivots="3,6/-120@TR3,6/120@TR3,6")
+  .robotpivot.fragment(data-target="rigidhex", data-pivots="3,6/-60@TR3,6/-60@TR4,7")
 
 section
   h2 Hexagon Algorithm Overview
