@@ -1,0 +1,36 @@
+section
+  h1(style="font-variant: small-caps") Token Swapping and Robot Pivoting
+  hr
+  h4
+    u Erik&nbsp;Demaine
+    span(style="font-weight: normal") , MIT
+  .columns.r-stretch
+    .column.fill.justify-content-center
+      svg.tokens(viewBox="-10 -10 370 170", style="padding-top:0.5rem")
+        line(x1="50", y1="25", x2="100", y2="65")
+        line(x1="50", y1="125", x2="100", y2="85")
+        line(x1="150", y1="75", x2="200", y2="75")
+        line(x1="300", y1="25", x2="250", y2="65")
+        line(x1="300", y1="125", x2="250", y2="85")
+        rect.t1(x="0", y="0", width="50", height="50")
+        rect.t2(x="0", y="100", width="50", height="50")
+        rect.t3(x="100", y="50", width="50", height="50")
+        rect.t4(x="200", y="50", width="50", height="50")
+        rect.t5(x="300", y="0", width="50", height="50")
+        rect.t6(x="300", y="100", width="50", height="50")
+        circle.t5(cx="25", cy="25", r="16")
+        circle.t1(cx="25", cy="125", r="16")
+        circle.t6(cx="125", cy="75", r="16")
+        circle.t4(cx="225", cy="75", r="16")
+        circle.t2(cx="325", cy="25", r="16")
+        circle.t3(cx="325", cy="125", r="16")
+      .tokenswap.fragment(data-swaps="2,4 2,6 2,1 1,5 3,6 3,5 4,5")
+    .column.fill.robots#intro69(data-fragment-index=1).
+      .....
+      .OOO.
+      .O...
+      .OOO.
+      .O.O.
+      .OOO.
+      .....
+  .robotpivot.fragment(data-target="intro69", data-pivots="1,5/-180@2,6/-90@3,6/-180@4,6/-90@4,5/-90@4,4 1,5/-180@4,3/180@4,3 3,1/-180@3,1 1,5/-180@4,3 3,1/180@3,1 1,4/-90@2,5")
