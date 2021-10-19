@@ -406,19 +406,6 @@ section
     li Each token $t$ has a weight $w(t) \in \{0,1\}$
     li Cost of swapping $t \leftrightarrow t'$ is $w(t) + w(t')$
   svg.tokens(viewBox="-510 -10 795 370")
-    foreignObject(x="100", y="0", width="300", height="150", transform="scale(0.75)")
-      div $w(~~~~~~) = 1$
-      div $w(~~~~~~) = 0$
-    circle.t12(cx="157", cy="15", r="16")
-    circle.t15(cx="162", cy="20", r="16")
-    circle.t19(cx="167", cy="25", r="16")
-    circle.t22(cx="172", cy="30", r="16")
-    circle.t26(cx="177", cy="35", r="16")
-    circle.t1(cx="157", cy="63", r="16")
-    circle.t3(cx="162", cy="68", r="16")
-    circle.t5(cx="167", cy="73", r="16")
-    circle.t7(cx="172", cy="78", r="16")
-    circle.t9(cx="177", cy="83", r="16")
     // Path
     line(x1="-475", y1="150", x2="-475", y2="200")
     line(x1="-475", y1="50", x2="-475", y2="100")
@@ -496,6 +483,20 @@ section
     circle.t5(cx="-125", cy="275", r="16")
     circle.t1(cx="25", cy="275", r="16")
     circle.t3(cx="175", cy="275", r="16")
+    // Weights (must come after actual tokens)
+    foreignObject(x="100", y="0", width="300", height="150", transform="scale(0.75)")
+      div $w(~~~~~~) = 1$
+      div $w(~~~~~~) = 0$
+    circle.t12(cx="157", cy="15", r="16")
+    circle.t15(cx="162", cy="20", r="16")
+    circle.t19(cx="167", cy="25", r="16")
+    circle.t22(cx="172", cy="30", r="16")
+    circle.t26(cx="177", cy="35", r="16")
+    circle.t1(cx="157", cy="63", r="16")
+    circle.t3(cx="162", cy="68", r="16")
+    circle.t5(cx="167", cy="73", r="16")
+    circle.t7(cx="172", cy="78", r="16")
+    circle.t9(cx="177", cy="83", r="16")
   .tokenswap.fragment(data-swaps="11,9 11,26 11,25 11,24 11,23 11,22 11,21 11,20 11,19")
   .tokenswap.fragment(data-swaps="7,9")
   .tokenswap.fragment(data-swaps="26,7 26,18")
