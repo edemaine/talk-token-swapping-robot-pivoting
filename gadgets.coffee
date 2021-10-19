@@ -1,4 +1,4 @@
-id = (target, x) -> SVG("##{target} .#{x}")
+id = (target, x) -> SVG("section.present #{if target then '#'+target else ''} .#{x}")
 
 leftTrigger = (target) ->
   id(target, 'agent').animate().dmove 0, 115

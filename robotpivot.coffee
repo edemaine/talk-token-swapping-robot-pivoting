@@ -33,10 +33,10 @@ hexCorners =
 animatePivots = (target, pivots, reverse) ->
   timeline?.finish()
   timeline = new SVG.Timeline
-  root = document.getElementById target
+  root = document.querySelector "section.present ##{target}"
   unless root?
     return console.warn "Invalid target #{target}"
-  svg = SVG "##{target} > svg"
+  svg = SVG "section.present ##{target} > svg"
   pivotCenter = svg.circle 2*pivotRadius
   .addClass 'pivotCenter'
   .opacity 0
@@ -74,7 +74,7 @@ animatePivots = (target, pivots, reverse) ->
     [use, ...rotations] = pivot.split '/'
 
     use = parseCoords use
-    selector = "##{target} use[x#{select use.x}][y#{select use.y}]"
+    selector = "section.present ##{target} use[x#{select use.x}][y#{select use.y}]"
     robot = SVG selector
     unless robot?
       console.warn "Failed to select #{selector}"
