@@ -558,3 +558,39 @@ section
       td PSPACE-hard
       td PSPACE-hard
       td PSPACE-hard
+
+section
+  h2 Motion-Planning-Through-Gadgets Framework
+  ul
+    li Which <b>local finite-state gadgets</b> suffice to prove <b>single-agent</b> motion planning <b>PSPACE-complete</b>?
+      span(style="font-size: 80%")
+        cite [Demaine, Grosof, Lynch, Rudoy 2018]
+        span.sep &bull;
+        cite [Demaine, Hendrickson, Lynch 2020]
+        span.sep &bull;
+        cite [Ani, Bosboom, Demaine, Diomidov, Hendrickson, Lynch 2020]
+        span.sep &bull;
+        cite [Ani, Demaine, Hendrickson, Lynch 2021]
+  .columns.r-stretch
+    .column
+      p
+      ul
+        li <u>Example</u>:<br><b>Locking 2-toggle</b>
+    .column.fill(style="margin-top: -25px")
+      img.big.invert.pop(src="L2T_states.svg")
+    .column.invert.pop(style="margin-top: -25px")
+      svg(viewBox="-0.5 10 87 144", width="100%", height="100%")
+        rect(x="2", y="37", width="80", height="80", rx="12", ry="12", fill="#000000", stroke="#000000", stroke-width="4", transform="translate(2,3)", opacity="0.25")
+        rect(x="2", y="37", width="80", height="80", rx="12", ry="12", fill="#e1d5e7", stroke="#000000", stroke-width="4")
+        path#leftSegment(d="M 22 37 L 22 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path#leftDown(d="M 22 114.76 L 14 98.76 L 22 102.76 L 30 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path#leftUp(d="M 22 39.24 L 30 55.24 L 22 51.24 L 14 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
+        path#rightSegment(d="M 62 37 L 62 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path#rightDown(d="M 62 114.76 L 54 98.76 L 62 102.76 L 70 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path#rightUp(d="M 62 39.24 L 70 55.24 L 62 51.24 L 54 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
+        circle#agent(cx="22", cy="20", r="10", fill="purple")
+  .fragment.L2T(data-step=0)
+  .fragment.L2T(data-step=1)
+  .fragment.L2T(data-step=2)
+  .fragment.L2T(data-step=3)
+  .fragment.L2T(data-step=4)
