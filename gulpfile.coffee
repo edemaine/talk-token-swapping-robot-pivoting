@@ -7,7 +7,7 @@ gulpGhPages = require 'gulp-gh-pages'
 ## npx gulp pug: builds index.html from index.pug etc.
 exports.pug = pug = ->
   gulp.src 'index.pug'
-  .pipe gulpPug pretty: true
+  .pipe gulpPug pretty: false #true
   .pipe gulpChmod 0o644
   .pipe gulp.dest './'
 
