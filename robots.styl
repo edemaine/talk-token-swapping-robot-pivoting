@@ -34,68 +34,54 @@ rect, polygon
 .rotate-180
   animation: alternate linear infinite rotate-180 var(--rotate-duration)
 @keyframes rotate-60-1o2
-  0%
+  0%, 25%
     transform: rotate(0deg)
-  25%
-    transform: rotate(0deg)
-  50%
-    transform: rotate(60deg)
-  100%
+  50%, 100%
     transform: rotate(60deg)
 @keyframes rotate-60-2o2
-  0%
+  0%, 50%
     transform: rotate(0deg)
-  50%
-    transform: rotate(0deg)
-  75%
-    transform: rotate(60deg)
-  100%
+  75%, 100%
     transform: rotate(60deg)
 @keyframes rotate-90
-  0%
+  0%, 25%
     transform: rotate(0deg)
-  25%
-    transform: rotate(0deg)
-  75%
-    transform: rotate(90deg)
-  100%
+  75%, 100%
     transform: rotate(90deg)
 @keyframes rotate-90-1o2
-  0%
+  0%, 25%
     transform: rotate(0deg)
-  25%
-    transform: rotate(0deg)
-  50%
-    transform: rotate(90deg)
-  100%
+  50%, 100%
     transform: rotate(90deg)
 @keyframes rotate-90-2o2
-  0%
+  0%, 50%
     transform: rotate(0deg)
-  50%
-    transform: rotate(0deg)
-  75%
-    transform: rotate(90deg)
-  100%
+  75%, 100%
     transform: rotate(90deg)
 @keyframes rotate-120
-  0%
+  0%, 25%
     transform: rotate(0deg)
-  25%
-    transform: rotate(0deg)
-  75%
-    transform: rotate(120deg)
-  100%
+  75%, 100%
     transform: rotate(120deg)
 @keyframes rotate-180
-  0%
+  0%, 25%
     transform: rotate(0deg)
-  25%
-    transform: rotate(0deg)
-  75%
+  75%, 100%
     transform: rotate(180deg)
-  100%
-    transform: rotate(180deg)
+.show-first-half
+  animation: alternate linear infinite show-first-half var(--rotate-duration)
+.show-second-half
+  animation: alternate linear infinite show-second-half var(--rotate-duration)
+@keyframes show-first-half
+  0%, 40%
+    opacity: 1
+  60%, 100%
+    opacity: 0
+@keyframes show-second-half
+  0%, 40%
+    opacity: 0
+  60%, 100%
+    opacity: 1
 
 .robots > svg, .hexrobots > svg
   width: 100%

@@ -8,7 +8,7 @@ pivotDuration =
   180: 600
 pivotDelay = 100
 pivotFade = 100
-pivotRadius = 0.3
+pivotRadius = 0.15
 
 timeline = null
 
@@ -37,7 +37,7 @@ animatePivots = (target, pivots, reverse) ->
   unless root?
     return console.warn "Invalid target #{target}"
   svg = SVG "##{target} > svg"
-  pivotCenter = svg.circle pivotRadius
+  pivotCenter = svg.circle 2*pivotRadius
   .addClass 'pivotCenter'
   .opacity 0
   .timeline timeline
