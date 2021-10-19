@@ -93,7 +93,7 @@ section
   ul
     li Given two configurations of $n$ <b>robots/modules</b>
     li.fragment(data-fragment-index=1) Reconfigure via a sequence of <b>pivots</b>
-    li.fragment Maintain <b>connectivity</b> <i>throughout</i>
+    li.fragment Maintain <b>connectivity</b> via edges <i>throughout</i>
       div(style="font-size: 80%") (including during pivot, except for the pivoted robot)
   .columns.r-stretch
     .column.fill.robots.
@@ -329,7 +329,8 @@ section
       td PSPACE-hard
 
 section
-  h2 Hexagon Model Intuition
+  //h2 Hexagon Model Intuition
+  h2 Restricted vs. Monkey Moves
   ul
     li Some configurations are <b>rigid</b> under restricted moves
       cite [Nguyen, Guibas, Kim 2001]
@@ -387,9 +388,9 @@ section(data-transition="fade")
       ul
         li <u>Goal</u>: <b>Canonicalize</b><br>into vertical strip
         p
-        li If there's a robot
+        li If a robot is
           ul
-            li on the <b>outer shell</b>,
+            li on the <b>convex hull</b>,
             li whose removal <b>preserves connectivity</b>,
           | then can pivot robot directly to vertical strip
         li.fragment Otherwise, we need to make such a robot&hellip;
@@ -492,7 +493,7 @@ section
         li Now 2-connected
         li Using a modified merge procedure, can produce a robot
           ul
-            li on the outer shell,
+            li on the convex hull,
             li whose removal <b>preserves 2-connectivity</b>
         li Pivot robot directly to vertical strip
     .column.h-100.hexrobots#phase3.
