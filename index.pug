@@ -16,7 +16,6 @@ html(nighteye="disabled")
     link(rel="stylesheet", href="node_modules/reveal.js/dist/reveal.css")
     link(rel="stylesheet", href="node_modules/reveal.js/dist/theme/black.css")
     link(rel="stylesheet", href="node_modules/reveal.js-plugins/chalkboard/style.css")
-    link(rel="stylesheet", href="node_modules/reveal.js-plugins/menu/font-awesome/css/all.css")
     link(rel="stylesheet", href="node_modules/@fontsource/merriweather/latin-400.css")
     link(rel="stylesheet", href="node_modules/@fontsource/merriweather/latin-400-italic.css")
     link(rel="stylesheet", href="node_modules/@fontsource/merriweather/latin-900.css")
@@ -54,8 +53,22 @@ html(nighteye="disabled")
             boardmarkerWidth: 7
             colorButtons: true
             theme: 'whiteboard'
+            keyBindings:
+              clear: # remap from + keyCode for QWERTY keyboards
+                keyCode: 187
+                key: '='
+                description: 'Clear drawings on slide'
         renderMathInElement document.body,
           delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "$", right: "$", display: false},
           ]
+
+        ## Inlining just the needed FontAwesome icons
+        # https://fontawesome.com/v5.15/icons/pen?style=solid
+        document.querySelector('.fa-pen, .fa-pencil').innerHTML = '<svg height="1em" style="vertical-align:-0.125em" viewBox="0 0 512 512"><path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"></path></svg>'
+        # https://fontawesome.com/v5.15/icons/pen-square?style=solid
+        document.querySelector('.fa-pen-square').innerHTML = '<svg height="1em" style="vertical-align:-0.125em" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>'
+        # https://fontawesome.com/v5.15/icons/square?style=solid
+        for elt in document.querySelectorAll('.fa-square')
+          elt.innerHTML = '<svg height="1em" style="vertical-align:-0.125em" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"></path></svg>'
