@@ -32,6 +32,7 @@ section
       rect.robot(x=0, y=2, width=1, height=1)
       rect.robot(x=1, y=2, width=1, height=1)
       rect.robot.r1.rotate-90(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+      circle.pivotCenter(cx=1, cy=2, r=0.15)
     .column.space
     svg.column(viewBox="-0.1 -0.1 3.2 3.2", style=smallSquareMoveSize)
       rect.bad(x=0, y=0, width=1, height=1)
@@ -44,6 +45,7 @@ section
       rect.bad(x=2, y=2, width=1, height=1)
       rect.robot(x=0, y=2, width=1, height=1)
       rect.robot.r1.rotate-180(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+      circle.pivotCenter(cx=1, cy=2, r=0.15)
     .column.space
     svg.column(viewBox="-0.1 -0.1 3.2 3.2", style=smallSquareMoveSize)
       rect.bad(x=0, y=0, width=1, height=1)
@@ -56,6 +58,7 @@ section
       rect.robot(x=0, y=2, width=1, height=1)
       rect.robot(x=2, y=1, width=1, height=1)
       rect.robot.r1.rotate-90(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+      circle.pivotCenter(cx=1, cy=2, r=0.15)
     .column.space
     svg.column(viewBox="-0.1 -0.1 3.2 3.2", style=smallSquareMoveSize)
       rect.bad(x=0, y=0, width=1, height=1)
@@ -69,6 +72,8 @@ section
       rect.robot(x=2, y=2, width=1, height=1)
       g.rotate-90-2o2(style="transform-origin: 2px 2px")
         rect.robot.r1.rotate-90-1o2(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+      circle.pivotCenter.show-first-half(cx=1, cy=2, r=0.15)
+      circle.pivotCenter.show-second-half(cx=2, cy=2, r=0.15)
     .column.space
     svg.column(viewBox="-0.1 -0.1 3.2 3.2", style=smallSquareMoveSize)
       rect.bad(x=0, y=0, width=1, height=1)
@@ -82,6 +87,8 @@ section
       rect.robot(x=2, y=0, width=1, height=1)
       g.rotate-90-2o2(style="transform-origin: 2px 1px")
         rect.robot.r1.rotate-90-1o2(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+      circle.pivotCenter.show-first-half(cx=1, cy=2, r=0.15)
+      circle.pivotCenter.show-second-half(cx=2, cy=1, r=0.15)
 
 svg.hidden
   // Diagonal hatching: scaling of https://stackoverflow.com/a/22643745
@@ -200,6 +207,8 @@ section
         rect.robot(x=2, y=0, width=1, height=1)
         g.rotate-90-2o2(style="transform-origin: 2px 1px")
           rect.robot.r1.rotate-90-1o2(x=0, y=1, width=1, height=1, style="transform-origin: 1px 2px")
+        circle.pivotCenter.show-first-half(cx=1, cy=2, r=0.15)
+        circle.pivotCenter.show-second-half(cx=2, cy=1, r=0.15)
     p Monkey moves
 
 - hexX = 1.5/2
