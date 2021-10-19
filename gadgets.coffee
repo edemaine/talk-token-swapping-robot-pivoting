@@ -1,41 +1,41 @@
-id = (x) -> SVG("##{x}")
+id = (target, x) -> SVG("##{target} .#{x}")
 
-leftTrigger = ->
-  id('agent').animate().dmove 0, 115
+leftTrigger = (target) ->
+  id(target, 'agent').animate().dmove 0, 115
   .after ->
-    id('leftDown').animate().opacity 0
-    id('rightDown').animate().opacity 0
-    id('rightSegment').animate().opacity 0
-    id('leftUp').animate().opacity 1
+    id(target, 'leftDown').animate().opacity 0
+    id(target, 'rightDown').animate().opacity 0
+    id(target, 'rightSegment').animate().opacity 0
+    id(target, 'leftUp').animate().opacity 1
 
-leftReverse = ->
-  id('agent').animate().dmove 0, -115
+leftReverse = (target) ->
+  id(target, 'agent').animate().dmove 0, -115
   .after ->
-    id('leftDown').animate().opacity 1
-    id('rightDown').animate().opacity 1
-    id('rightSegment').animate().opacity 1
-    id('leftUp').animate().opacity 0
+    id(target, 'leftDown').animate().opacity 1
+    id(target, 'rightDown').animate().opacity 1
+    id(target, 'rightSegment').animate().opacity 1
+    id(target, 'leftUp').animate().opacity 0
 
-rightTrigger = ->
-  id('agent').animate().dmove 0, 115
+rightTrigger = (target) ->
+  id(target, 'agent').animate().dmove 0, 115
   .after ->
-    id('rightDown').animate().opacity 0
-    id('leftDown').animate().opacity 0
-    id('leftSegment').animate().opacity 0
-    id('rightUp').animate().opacity 1
+    id(target, 'rightDown').animate().opacity 0
+    id(target, 'leftDown').animate().opacity 0
+    id(target, 'leftSegment').animate().opacity 0
+    id(target, 'rightUp').animate().opacity 1
 
-rightReverse = ->
-  id('agent').animate().dmove 0, -115
+rightReverse = (target) ->
+  id(target, 'agent').animate().dmove 0, -115
   .after ->
-    id('rightDown').animate().opacity 1
-    id('leftDown').animate().opacity 1
-    id('leftSegment').animate().opacity 1
-    id('rightUp').animate().opacity 0
+    id(target, 'rightDown').animate().opacity 1
+    id(target, 'leftDown').animate().opacity 1
+    id(target, 'leftSegment').animate().opacity 1
+    id(target, 'rightUp').animate().opacity 0
 
-leftToRight = ->
-  id('agent').animate().dmove 40, 0
-rightToLeft = ->
-  id('agent').animate().dmove -40, 0
+leftToRight = (target) ->
+  id(target, 'agent').animate().dmove 40, 0
+rightToLeft = (target) ->
+  id(target, 'agent').animate().dmove -40, 0
 
 steps = [
   leftTrigger
@@ -54,8 +54,8 @@ reverseSteps = [
 
 Reveal.on 'fragmentshown', (e) ->
   return unless e.fragment.classList.contains 'L2T'
-  steps[e.fragment.dataset.step]()
+  steps[e.fragment.dataset.step](e.fragment.dataset.target)
 
 Reveal.on 'fragmenthidden', (e) ->
   return unless e.fragment.classList.contains 'L2T'
-  reverseSteps[e.fragment.dataset.step]()
+  reverseSteps[e.fragment.dataset.step](e.fragment.dataset.target)

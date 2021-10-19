@@ -579,18 +579,92 @@ section
     .column.fill(style="margin-top: -25px")
       img.big.invert.pop.bright(src="L2T_states.svg")
     .column.invert.pop.bright(style="margin-top: -25px")
-      svg(viewBox="-0.5 10 87 144", width="100%", height="100%")
+      svg#L2T(viewBox="-0.5 10 87 144", width="100%", height="100%")
         rect(x="2", y="37", width="80", height="80", rx="12", ry="12", fill="#000000", stroke="#000000", stroke-width="4", transform="translate(2,3)", opacity="0.25")
         rect(x="2", y="37", width="80", height="80", rx="12", ry="12", fill="#e1d5e7", stroke="#000000", stroke-width="4")
-        path#leftSegment(d="M 22 37 L 22 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
-        path#leftDown(d="M 22 114.76 L 14 98.76 L 22 102.76 L 30 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
-        path#leftUp(d="M 22 39.24 L 30 55.24 L 22 51.24 L 14 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
-        path#rightSegment(d="M 62 37 L 62 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
-        path#rightDown(d="M 62 114.76 L 54 98.76 L 62 102.76 L 70 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
-        path#rightUp(d="M 62 39.24 L 70 55.24 L 62 51.24 L 54 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
-        circle#agent(cx="22", cy="20", r="10", fill="hsl(57.4, 50%, 50%)", stroke="hsl(57.4, 40%, 40%)")
-  .fragment.L2T(data-step=0)
-  .fragment.L2T(data-step=1)
-  .fragment.L2T(data-step=2)
-  .fragment.L2T(data-step=3)
-  .fragment.L2T(data-step=4)
+        path.leftSegment(d="M 22 37 L 22 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.leftDown(d="M 22 114.76 L 14 98.76 L 22 102.76 L 30 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.leftUp(d="M 22 39.24 L 30 55.24 L 22 51.24 L 14 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
+        path.rightSegment(d="M 62 37 L 62 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.rightDown(d="M 62 114.76 L 54 98.76 L 62 102.76 L 70 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.rightUp(d="M 62 39.24 L 70 55.24 L 62 51.24 L 54 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
+        circle.agent(cx="22", cy="20", r="10", fill="hsl(57.4, 50%, 50%)", stroke="hsl(57.4, 40%, 40%)")
+  .fragment.L2T(data-target="L2T", data-step=0)
+  .fragment.L2T(data-target="L2T", data-step=1)
+  .fragment.L2T(data-target="L2T", data-step=2)
+  .fragment.L2T(data-target="L2T", data-step=3)
+  .fragment.L2T(data-target="L2T", data-step=4)
+
+section
+  .columns.r-stretch
+    .column.fill.hexrobots#hexL2T.
+       . . . . . . . . . . . . . . . . 
+      . . . . . . . . . . . . . . . . .
+       . . . . . . . O O . . . . . . . 
+      2 . . . . O . O O O . O . . . . 2
+       2 . . . O O O . . O O O . . . 2 
+      . 2 . . O . O . O . O . O . . 2 .
+       1 2 . O . . . O O . . . O . 2 . 
+      . 1 2 O . 2 . O . O . 2 . O 2 . .
+       . . 2 . 2 2 O . . O 2 2 . 2 . . 
+      . . . 2 . . . . . . . . . 2 . . .
+       . . . 2 . 2 O . . O 2 . 2 . . . 
+      . . . . 2 2 . . . . . 2 2 . . . .
+       . . . . 2 . O . . O . 2 . . . . 
+      . . . . . . 1 O . O 1 . . . . . .
+       . O . . . . . O O . . . . . O . 
+      . O O . . . O . . . O . . . O O .
+       O . O . . O O O O O O . . O . O 
+      . . . . . O . . . . . O . . . . .
+       O O O . O . . O O . . O . O O O 
+      . . . . O . O O . O O . O . . . .
+       O O O O O . O . . O . O O O O O 
+      . O . . . O . . . . . O . . . O .
+       . . O O . O . . . . O . O O . . 
+      . . . . . . O . . . O . . . . . .
+       . . O O O . O . . O . O O O . . 
+      . . . . . O . O . O . O . . . . .
+       . . O O . . . O O . . . O O . . 
+      . . . . O O . . O . . O O . . . .
+       . . O . O . . . . . . O . O . . 
+      . . . . . . . . O . . . . . . . .
+       . . O . . O . . . . O . . O . . 
+      . . . . O O O . O . O O O . . . .
+       . . O O O . O . . O . O O O . . 
+      . O . . . . . . O . . . . . . O .
+       O O O O . O O . . O O . O O O O 
+      . . . . O . O . O . O . O . . . .
+       O O O . O . . . . . . O . O O O 
+      . . . . 1 O . . O . . O 1 . . . .
+       O . O 1 . O . . . . O . 1 O . O 
+      . O O 1 . . O . O . O . . 1 O O .
+       . O . . . . O . . O . . . . O . 
+      . . . . . . . O O O . . . . . . .
+       . . . . 2 . . O O . . 2 . . . . 
+      . . . . 2 2 . . O . . 2 2 . . . .
+       . . . 2 . 2 . . . . 2 . 2 . . . 
+      . . . 2 . . . . O . . . . 2 . . .
+       . . 2 . 2 2 . O O . 2 2 . 2 . . 
+      . . 2 O . 2 . O . O . 2 . O 2 . .
+       . 2 . O . . O . . O . . O . 2 . 
+      . 2 . . O . O . . . O . O . . 2 .
+       2 . . . O O . . . . O O . . . 2 
+      2 . . . . O . . . . . O . . . . 2
+       . . . . . . . . . . . . . . . . 
+      . . . . . . . . . . . . . . . . .
+    .column.invert.bright.pop(style="text-align: right")
+      svg#hexL2Tdiagram(viewBox="-0.5 10 87 144", width="80%", height="100%")
+        rect(x="2", y="37", width="80", height="80", rx="12", ry="12", fill="#000000", stroke="#000000", stroke-width="4", transform="translate(2,3)", opacity="0.25")
+        rect(x="2", y="37", width="80", height="80", rx="12", ry="12", fill="#e1d5e7", stroke="#000000", stroke-width="4")
+        path.leftSegment(d="M 22 37 L 22 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.leftDown(d="M 22 114.76 L 14 98.76 L 22 102.76 L 30 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.leftUp(d="M 22 39.24 L 30 55.24 L 22 51.24 L 14 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
+        path.rightSegment(d="M 62 37 L 62 115", fill="none", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.rightDown(d="M 62 114.76 L 54 98.76 L 62 102.76 L 70 98.76 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10")
+        path.rightUp(d="M 62 39.24 L 70 55.24 L 62 51.24 L 54 55.24 Z", fill="#000000", stroke="#000000", stroke-width="2", stroke-miterlimit="10", opacity="0")
+        circle.agent(cx="22", cy="20", r="10", fill="hsl(57.4, 50%, 50%)", stroke="hsl(57.4, 40%, 40%)")
+  .robotpivot.fragment(data-target="hexL2T", data-pivots="2,7/-120@R2,7 1,6/-120@R1,6 2,7/-120@R3,8 1,6/-120@R2,7 2,7/-120@R4,9 1,6/-120@R3,8 2,7/-120@R5,10 1,6/-120@R4,9 2,7/-120@R6,11 1,6/-120@R5,10 2,7/-120@R7,12 1,6/-120@R6,11")
+  .robotpivot.fragment(data-target="hexL2T", data-pivots="12,13/-120@BL12,13/-120@BL11,14")
+  .robotpivot.fragment(data-target="hexL2T", data-pivots="2,7/-120@R8,13/-120@BR9,14/-120@BL9,16 1,6/-120@R7,12/-120@R8,13/-60@BR9,14/-60@BR8,15/-120@BL8,15 12,13/-120@BL10,15/-120@L9,16/-120@L8,15/-120@BL7,14")
+  .fragment.L2T(data-target="hexL2Tdiagram", data-step=0)
+  .robotpivot.fragment(data-target="hexL2T", data-pivots="6,39/-120@R6,39/-120@TR7,40/-120@TR8,39/-120@R9,38 7,38/120@TR7,38 8,37/-120@R8,37/-120@BR9,38/-120@BL9,40/-120@BL8,41 7,38/-120@R7,36/-120@R8,37/-120@BR9,38/-120@BL9,40 8,37/-120@BL7,42 7,38/-120@BL8,41 8,37/-120@BL6,43 7,38/-120@BL7,42 8,37/-120@BL5,44 7,38/-120@BL6,43 8,37/-120@BL4,45 7,38/-120@BL5,44 8,37/-120@BL3,46 7,38/-120@BL4,45 8,37/-120@BL2,47 7,38/-120@BL3,46")
