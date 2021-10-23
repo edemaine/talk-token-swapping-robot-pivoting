@@ -30,8 +30,17 @@ exports.watch = watch = ->
 deploySet = [
   './.nojekyll'
   './index.html'
+  # JavaScript
+  './figures.js'
+  './gadgets.js'
+  './robotpivot.js'
   './tokenswap.js'
+  # Figures
   './cayley4.png'
+  './degree1.svg'
+  './L2T_states.svg'
+  './merge-example.svg'
+  # NPM dependencies
   './node_modules/reveal.js/dist/reveal.js'
   './node_modules/reveal.js-plugins/chalkboard/plugin.js'
   './node_modules/@svgdotjs/svg.js/dist/svg.min.js'
@@ -47,6 +56,7 @@ deploySet = [
   './node_modules/reveal.js-plugins/menu/font-awesome/css/all.css'
   './node_modules/reveal.js-plugins/menu/font-awesome/webfonts/fa-solid-900.woff2'
   './node_modules/katex/dist/katex.css'
+  './node_modules/svgtiler/lib/svgtiler.js'
   './node_modules/@fontsource/merriweather/latin-400.css'
   './node_modules/@fontsource/merriweather/latin-400-italic.css'
   './node_modules/@fontsource/merriweather/latin-900.css'
