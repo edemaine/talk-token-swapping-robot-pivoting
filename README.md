@@ -1,19 +1,26 @@
 # Talk: Token Swapping and Robot Pivoting
 
-Based in part on 
+This repository contains slides and animations for a talk presented at the
+[Workshop on Rapid Reconfiguration of Programmable Matter](http://www.self-assembly.net/UCNC2021-prog-matter/)
+at the
+[19th International Conference on Unconventional Computation and Natural Computation (UCNC 2021)](https://ucnc2021.cs.aalto.fi/).
+
+The talk mainly presents the results of two 2021 papers:
+
+1. "[Hardness of Token Swapping on Trees](https://arxiv.org/abs/2103.06707)"
+   by Oswin Aichholzer, Erik Demaine, Matias Korman, Jayson Lynch, Anna Lubiw,
+   Zuzana Mas, Mikhail Rudoy, Virginia Vassilevska Williams, and Nicole Wein.
+2. "[Characterizing Universal Reconfigurability of Modular Pivoting Robots](https://erikdemaine.org/papers/HingedPixels_SoCG2021/)"
+   by Hugo Akitaya, Erik Demaine, Andrei Gonczi, Dylan Hendrickson, Adam Hesterberg, Matias Korman, Oliver Korten, Jayson Lynch, Irene Parada, and Vera Sacristán.
+
+See the papers for more details about the results.
+
+The first half of the talk builds on
 [these slides about Token Swapping on Trees](https://github.com/edemaine/talk-token-swapping-robot-pivoting).
 
-<!--
-This repository contains slides and animations for a talk about our 2021 paper
-"[Hardness of Token Swapping on Trees](https://arxiv.org/abs/2103.06707)"
-by Oswin Aichholzer, Erik Demaine, Matias Korman, Jayson Lynch, Anna Lubiw,
-Zuzana Mas, Mikhail Rudoy, Virginia Vassilevska Williams, and Nicole Wein.
-See the paper for more details about the results.
+## [View Slides](https://edemaine.github.io/talk-token-swapping-robot-pivoting/)
 
-## [View Slides](https://edemaine.github.io/talk-token-swapping-in-trees/)
-
-[![Title slide](title_slide.jpg)](https://edemaine.github.io/talk-token-swapping-in-trees/)
--->
+[![Title slide](title_slide.jpg)](https://edemaine.github.io/talk-token-swapping-robot-pivoting/)
 
 ## Technology: reveal.js + Pug + Stylus + CoffeeScript + SVG Tiler + SVG.js + KaTeX
 
@@ -33,9 +40,11 @@ to make slides by combining the following technology (all free and open source):
     for CSS (styling of HTML)
   * [CoffeeScript](https://coffeescript.org/): an indentation-based language
     that compiles to JavaScript
-* [KaTeX](https://katex.org): a library for translating LaTeX math into HTML
+* [SVG Tiler](https://github.com/edemaine/svgtiler):
+  a library for converting ASCII art into high-quality SVG graphics
 * [SVG.js](https://svgdotjs.github.io/):
   a library that makes it easy to add animations to SVG drawings
+* [KaTeX](https://katex.org): a library for translating LaTeX math into HTML
 * [Gulp](https://gulpjs.com/): a tool that builds the Pug code into HTML
 
 ## Structure
