@@ -1,0 +1,843 @@
+<!DOCTYPE html><html nighteye="disabled"><head><meta charset="utf8"><script src="node_modules/reveal.js/dist/reveal.js"></script><script src="node_modules/reveal.js-plugins/chalkboard/plugin.js"></script><script src="node_modules/@svgdotjs/svg.js/dist/svg.min.js"></script><script src="node_modules/katex/dist/katex.min.js"></script><script src="node_modules/katex/dist/contrib/auto-render.min.js"></script><script src="node_modules/svgtiler/lib/svgtiler.js"></script><script src="figures.js"></script><script src="tokenswap.js"></script><script src="robotpivot.js"></script><script src="gadgets.js"></script><link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css"><link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css"><link rel="stylesheet" href="node_modules/reveal.js-plugins/chalkboard/style.css"><link rel="stylesheet" href="node_modules/@fontsource/merriweather/latin-400.css"><link rel="stylesheet" href="node_modules/@fontsource/merriweather/latin-400-italic.css"><link rel="stylesheet" href="node_modules/@fontsource/merriweather/latin-900.css"><link rel="stylesheet" href="node_modules/@fontsource/merriweather/latin-900-italic.css"><link rel="stylesheet" href="node_modules/@fontsource/merriweather/latin-ext-400-italic.css"><link rel="stylesheet" href="node_modules/katex/dist/katex.css"><style>:root {
+  --r-main-font: Merriweather, serif;
+  --r-heading-font: Merriweather, serif;
+  --r-heading-text-transform: none;
+  --r-background-color: #000;
+  --r-selection-background-color: #444;
+}
+.reveal .slides section .fragment {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s ease;
+  will-change: initial;
+}
+.reveal .slides section .fragment.visible {
+  opacity: 1;
+  visibility: inherit;
+}
+ul,
+ol {
+  width: calc(100% - 1em);
+  box-sizing: border-box;
+}
+th {
+  color: #000;
+  background: #ccc;
+  border-color: #000;
+}
+cite {
+  color: #c0a5c0;
+  font-weight: normal;
+}
+h2 cite {
+  font-size: 85%;
+}
+.columns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.column {
+  text-align: center !important;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.column.fill {
+  flex-basis: 0;
+  flex-grow: 1;
+  align-self: stretch;
+}
+.column.space {
+  width: 30px;
+}
+.column.arrow {
+  margin: 0 10px;
+  font-size: 200%;
+}
+.column.arrow:before {
+  content: '🡆';
+}
+span.space {
+  margin-left: 0.25em;
+}
+.text-center {
+  text-align: center !important;
+}
+.vertical-middle {
+  vertical-align: middle !important;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.h-100 {
+  height: 100%;
+}
+.hidden {
+  position: absolute;
+  display: block;
+}
+.invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+.invert.pop {
+  filter: invert(1) hue-rotate(180deg) drop-shadow(0 0 1px #fff);
+}
+.invert.pop.bright {
+  filter: invert(1) hue-rotate(180deg) brightness(1.75) drop-shadow(0 0 1px #fff);
+}
+img.big {
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+}
+.url {
+  display: block;
+  font-size: 40%;
+  font-family: monospace;
+}
+.sep {
+  display: inline-block;
+  color: #9a5b9a;
+  margin: 0 0.25em;
+}
+svg.tokens .t1 {
+  fill: #e6261f;
+}
+svg.tokens .t2 {
+  fill: #eb7532;
+}
+svg.tokens .t3 {
+  fill: #f7d038;
+}
+svg.tokens .t4 {
+  fill: #a3e048;
+}
+svg.tokens .t5 {
+  fill: #49da9a;
+}
+svg.tokens .t6 {
+  fill: #34bbe6;
+}
+svg.tokens .t7 {
+  fill: #4355db;
+}
+svg.tokens .t8 {
+  fill: #9f3be7;
+}
+svg.tokens .t9 {
+  fill: #e634d0;
+}
+svg.tokens .t11 {
+  fill: #0f0f0f;
+}
+svg.tokens .t12 {
+  fill: #1f1f1f;
+}
+svg.tokens .t13 {
+  fill: #2e2e2e;
+}
+svg.tokens .t14 {
+  fill: #3d3d3d;
+}
+svg.tokens .t15 {
+  fill: #4d4d4d;
+}
+svg.tokens .t16 {
+  fill: #5c5c5c;
+}
+svg.tokens .t17 {
+  fill: #6b6b6b;
+}
+svg.tokens .t18 {
+  fill: #7a7a7a;
+}
+svg.tokens .t19 {
+  fill: #8a8a8a;
+}
+svg.tokens .t20 {
+  fill: #999;
+}
+svg.tokens .t21 {
+  fill: #a8a8a8;
+}
+svg.tokens .t22 {
+  fill: #b8b8b8;
+}
+svg.tokens .t23 {
+  fill: #c7c7c7;
+}
+svg.tokens .t24 {
+  fill: #d6d6d6;
+}
+svg.tokens .t25 {
+  fill: #e6e6e6;
+}
+svg.tokens .t26 {
+  fill: #f5f5f5;
+}
+svg.tokens circle {
+  stroke: #000;
+  stroke-width: 3px;
+  fill: #aaa;
+}
+svg.tokens circle.t11,
+svg.tokens circle.t12,
+svg.tokens circle.t13,
+svg.tokens circle.t14,
+svg.tokens circle.t15,
+svg.tokens circle.t16,
+svg.tokens circle.t17,
+svg.tokens circle.t18 {
+  stroke: #fff;
+  filter: drop-shadow(0px 0px 3px #fff);
+}
+svg.tokens rect {
+  stroke: #fff;
+  stroke-width: 3px;
+  fill: #aaa;
+}
+svg.tokens line {
+  stroke: #fff;
+  stroke-width: 10px;
+  stroke-linecap: square;
+}
+svg.tokens circle {
+  filter: drop-shadow(0px 0px 3px #000);
+}
+svg.tokens rect {
+  filter: drop-shadow(0px 0px 4px #bbb);
+}
+svg.tokens line {
+  filter: drop-shadow(0px 0px 4px #bbb);
+}
+table.side-by-side {
+  table-layout: fixed;
+  width: 100%;
+}
+table.side-by-side td {
+  width: 50%;
+}
+table.compact td,
+table.compact th {
+  padding: 0 0.5em;
+}
+li > .tokens {
+  vertical-align: middle;
+}
+:root {
+  --bad-color: #933;
+}
+rect.robot,
+polygon.robot,
+rect.bad,
+polygon.bad,
+rect.empty,
+polygon.empty {
+  stroke-width: 0.1;
+}
+rect.robot,
+polygon.robot {
+  fill: #608f9f;
+  stroke: #fff;
+}
+rect.robot.r1,
+polygon.robot.r1 {
+  fill: #8b47eb;
+  stroke: #c5a3f5;
+}
+rect.robot.r2,
+polygon.robot.r2 {
+  fill: #3f9e2e;
+  stroke: #a7e29c;
+}
+rect.bad,
+polygon.bad,
+rect.empty,
+polygon.empty {
+  stroke: #404040;
+}
+rect.bad,
+polygon.bad {
+  fill: url("#hatch") var(--bad-color);
+}
+:root {
+  --rotate-duration: 3s;
+}
+.rotate-60-1o2 {
+  animation: alternate linear infinite rotate-60-1o2 var(--rotate-duration);
+}
+.rotate-60-2o2 {
+  animation: alternate linear infinite rotate-60-2o2 var(--rotate-duration);
+}
+.rotate-90 {
+  animation: alternate linear infinite rotate-90 var(--rotate-duration);
+}
+.rotate-90-1o2 {
+  animation: alternate linear infinite rotate-90-1o2 var(--rotate-duration);
+}
+.rotate-90-2o2 {
+  animation: alternate linear infinite rotate-90-2o2 var(--rotate-duration);
+}
+.rotate-120 {
+  animation: alternate linear infinite rotate-120 var(--rotate-duration);
+}
+.rotate-180 {
+  animation: alternate linear infinite rotate-180 var(--rotate-duration);
+}
+.show-first-half {
+  animation: alternate linear infinite show-first-half var(--rotate-duration);
+}
+.show-second-half {
+  animation: alternate linear infinite show-second-half var(--rotate-duration);
+}
+.robots > svg,
+.hexrobots > svg {
+  width: 100%;
+  flex-grow: 1;
+  overflow: visible;
+}
+.robots > svg:only-child,
+.hexrobots > svg:only-child {
+  height: 100%;
+}
+.pivotCenter {
+  fill: #e64cd1;
+  stroke: #701063;
+  stroke-width: 0.07;
+}
+@-moz-keyframes rotate-60-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@-webkit-keyframes rotate-60-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@-o-keyframes rotate-60-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@keyframes rotate-60-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@-moz-keyframes rotate-60-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@-webkit-keyframes rotate-60-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@-o-keyframes rotate-60-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@keyframes rotate-60-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(60deg);
+  }
+}
+@-moz-keyframes rotate-90 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-webkit-keyframes rotate-90 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-o-keyframes rotate-90 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@keyframes rotate-90 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-moz-keyframes rotate-90-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-webkit-keyframes rotate-90-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-o-keyframes rotate-90-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@keyframes rotate-90-1o2 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  50%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-moz-keyframes rotate-90-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-webkit-keyframes rotate-90-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-o-keyframes rotate-90-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@keyframes rotate-90-2o2 {
+  0%, 50% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(90deg);
+  }
+}
+@-moz-keyframes rotate-120 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(120deg);
+  }
+}
+@-webkit-keyframes rotate-120 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(120deg);
+  }
+}
+@-o-keyframes rotate-120 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(120deg);
+  }
+}
+@keyframes rotate-120 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(120deg);
+  }
+}
+@-moz-keyframes rotate-180 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(180deg);
+  }
+}
+@-webkit-keyframes rotate-180 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(180deg);
+  }
+}
+@-o-keyframes rotate-180 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes rotate-180 {
+  0%, 25% {
+    transform: rotate(0deg);
+  }
+  75%, 100% {
+    transform: rotate(180deg);
+  }
+}
+@-moz-keyframes show-first-half {
+  0%, 40% {
+    opacity: 1;
+  }
+  60%, 100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes show-first-half {
+  0%, 40% {
+    opacity: 1;
+  }
+  60%, 100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes show-first-half {
+  0%, 40% {
+    opacity: 1;
+  }
+  60%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes show-first-half {
+  0%, 40% {
+    opacity: 1;
+  }
+  60%, 100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes show-second-half {
+  0%, 40% {
+    opacity: 0;
+  }
+  60%, 100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes show-second-half {
+  0%, 40% {
+    opacity: 0;
+  }
+  60%, 100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes show-second-half {
+  0%, 40% {
+    opacity: 0;
+  }
+  60%, 100% {
+    opacity: 1;
+  }
+}
+@keyframes show-second-half {
+  0%, 40% {
+    opacity: 0;
+  }
+  60%, 100% {
+    opacity: 1;
+  }
+}
+</style></head><body><div class="reveal"><div class="slides"><section><h1 style="font-variant: small-caps">Token Swapping and Robot Pivoting</h1><hr><h4><u>Erik&nbsp;Demaine</u><span style="font-weight: normal">, MIT</span></h4><div class="columns r-stretch"><div class="column fill justify-content-center"><svg class="tokens" viewBox="-10 -10 370 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="65"></line><line x1="50" y1="125" x2="100" y2="85"></line><line x1="150" y1="75" x2="200" y2="75"></line><line x1="300" y1="25" x2="250" y2="65"></line><line x1="300" y1="125" x2="250" y2="85"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="0" y="100" width="50" height="50"></rect><rect class="t3" x="100" y="50" width="50" height="50"></rect><rect class="t4" x="200" y="50" width="50" height="50"></rect><rect class="t5" x="300" y="0" width="50" height="50"></rect><rect class="t6" x="300" y="100" width="50" height="50"></rect><circle class="t5" cx="25" cy="25" r="16"></circle><circle class="t1" cx="25" cy="125" r="16"></circle><circle class="t6" cx="125" cy="75" r="16"></circle><circle class="t4" cx="225" cy="75" r="16"></circle><circle class="t2" cx="325" cy="25" r="16"></circle><circle class="t3" cx="325" cy="125" r="16"></circle></svg><div class="tokenswap fragment" data-swaps="2,4 2,6 2,1 1,5 3,6 3,5 4,5"></div></div><div class="column fill robots" id="intro69" data-fragment-index="1">.....
+.OOO.
+.O...
+.OOO.
+.O.O.
+.OOO.
+.....</div></div><div class="robotpivot fragment" data-target="intro69" data-pivots="1,5/-180@2,6/-90@3,6/-180@4,6/-90@4,5/-90@4,4 1,5/-180@4,3/180@4,3 3,1/-180@3,1 1,5/-180@4,3 3,1/180@3,1 1,4/-90@2,5"></div></section><section><h1 style="font-variant: small-caps">Hardness of Token Swapping on Trees</h1><hr><h4>Oswin&nbsp;Aichholzer<span class="sep">&bull;</span><u>Erik&nbsp;Demaine</u><span class="sep">&bull;</span>Matias&nbsp;Korman<span class="sep">&bull;</span>Jayson&nbsp;Lynch<span class="sep">&bull;</span>Anna&nbsp;Lubiw<span class="sep">&bull;</span>Zuzana&nbsp;Masárová<span class="sep">&bull;</span>Mikhail&nbsp;Rudoy<span class="sep">&bull;</span>Virginia&nbsp;Vassilevska&nbsp;Williams<span class="sep">&bull;</span>Nicole&nbsp;Wein</h4><svg class="tokens" viewBox="-10 -10 870 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="25"></line><line x1="150" y1="25" x2="200" y2="25"></line><line x1="250" y1="25" x2="300" y2="25"></line><line x1="350" y1="25" x2="400" y2="25"></line><line x1="450" y1="25" x2="500" y2="25"></line><line x1="550" y1="25" x2="600" y2="25"></line><line x1="650" y1="25" x2="700" y2="25"></line><line x1="750" y1="25" x2="800" y2="25"></line><line x1="225" y1="50" x2="225" y2="100"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="100" y="0" width="50" height="50"></rect><rect class="t3" x="200" y="0" width="50" height="50"></rect><rect class="t4" x="300" y="0" width="50" height="50"></rect><rect class="t5" x="400" y="0" width="50" height="50"></rect><rect class="t6" x="500" y="0" width="50" height="50"></rect><rect class="t7" x="600" y="0" width="50" height="50"></rect><rect class="t8" x="700" y="0" width="50" height="50"></rect><rect class="t9" x="800" y="0" width="50" height="50"></rect><rect class="t10" x="200" y="100" width="50" height="50"></rect><circle class="t9" cx="25" cy="25" r="16"></circle><circle class="t8" cx="125" cy="25" r="16"></circle><circle class="t7" cx="225" cy="25" r="16"></circle><circle class="t6" cx="325" cy="25" r="16"></circle><circle class="t5" cx="425" cy="25" r="16"></circle><circle class="t4" cx="525" cy="25" r="16"></circle><circle class="t3" cx="625" cy="25" r="16"></circle><circle class="t2" cx="725" cy="25" r="16"></circle><circle class="t1" cx="825" cy="25" r="16"></circle><circle class="t10" cx="225" cy="125" r="16"></circle></svg><div class="tokenswap fragment" data-swaps="10,7 10,8 10,9 9,8 9,6 9,5 9,4 9,3 9,2 9,1 8,6 8,5 8,4 8,3 8,2 8,1 7,5 7,4 7,3 7,2 7,1 6,4 6,3 6,2 6,1 5,3 5,2 5,1 4,2 4,1 1,2 1,10 2,10 3,10"></div></section><section><h2>Token Swapping Problem</h2><ul><li>Given a <b>graph</b></li><ul><li class="fragment" data-fragment-index="1">with one <b>token</b> per vertex</li><li class="fragment" data-fragment-index="2">and a <b>destination</b> for each token</li></ul><li class="fragment">How many <b>swaps</b> along edges do we need?</li></ul><svg class="tokens r-stretch" viewBox="-10 -10 270 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="25"></line><line x1="150" y1="25" x2="200" y2="25"></line><line x1="25" y1="50" x2="25" y2="100"></line><line x1="225" y1="50" x2="225" y2="100"></line><line x1="200" y1="50" x2="150" y2="100"></line><line x1="50" y1="125" x2="100" y2="125"></line><line x1="150" y1="125" x2="200" y2="125"></line><rect x="0" y="0" width="50" height="50"></rect><rect x="100" y="0" width="50" height="50"></rect><rect x="200" y="0" width="50" height="50"></rect><rect x="0" y="100" width="50" height="50"></rect><rect x="100" y="100" width="50" height="50"></rect><rect x="200" y="100" width="50" height="50"></rect><rect class="t1 fragment" data-fragment-index="2" x="0" y="0" width="50" height="50"></rect><rect class="t2 fragment" data-fragment-index="2" x="100" y="0" width="50" height="50"></rect><rect class="t3 fragment" data-fragment-index="2" x="200" y="0" width="50" height="50"></rect><rect class="t4 fragment" data-fragment-index="2" x="0" y="100" width="50" height="50"></rect><rect class="t5 fragment" data-fragment-index="2" x="100" y="100" width="50" height="50"></rect><rect class="t6 fragment" data-fragment-index="2" x="200" y="100" width="50" height="50"></rect><circle class="t4 fragment" data-fragment-index="1" cx="25" cy="25" r="16"></circle><circle class="t2 fragment" data-fragment-index="1" cx="125" cy="25" r="16"></circle><circle class="t6 fragment" data-fragment-index="1" cx="225" cy="25" r="16"></circle><circle class="t5 fragment" data-fragment-index="1" cx="25" cy="125" r="16"></circle><circle class="t1 fragment" data-fragment-index="1" cx="125" cy="125" r="16"></circle><circle class="t3 fragment" data-fragment-index="1" cx="225" cy="125" r="16"></circle></svg><div class="tokenswap fragment" data-swaps="3,6"></div><div class="tokenswap fragment" data-swaps="1,5"></div><div class="tokenswap fragment" data-swaps="1,4"></div></section><section><h2>Cayley Graph View</h2><table class="side-by-side compact"><tr><td>&bull; Positions of tokens</td><td>&bull; Permutation in $S_n$</td></tr><tr><td>&bull; Graph edge</td><td>&bull; Transposition (swap)</td></tr><tr><td>&bull; Configuration space</td><td>&bull; Cayley graph</td></tr><tr><td>&bull; Reconfiguration</td><td>&bull; Path in Cayley graph</td></tr><tr class="r-stretch"><td><svg class="tokens" viewBox="-10 -10 370 70"><line x1="50" y1="25" x2="100" y2="25" style="stroke:#ffff00"></line><line x1="150" y1="25" x2="200" y2="25" style="stroke:#ff48fa"></line><line x1="250" y1="25" x2="300" y2="25" style="stroke:#23fefa"></line><rect x="0" y="0" width="50" height="50"></rect><rect x="100" y="0" width="50" height="50"></rect><rect x="200" y="0" width="50" height="50"></rect><rect x="300" y="0" width="50" height="50"></rect><circle cx="25" cy="25" r="16"></circle><circle cx="125" cy="25" r="16"></circle><circle cx="225" cy="25" r="16"></circle><circle cx="325" cy="25" r="16"></circle></svg></td><td style="text-align: center"><img src="cayley4.png" style="height:400px; margin: 0; filter: invert(1)"></td></tr><tr><td colspan="2" style="text-align:right"><a class="url" href="https://commons.wikimedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_1,2,6_(1-based).png">https://commons.wikimedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_1,2,6_(1-based).png</a></td></tr></table></section><section><h2>Connection to Bubble Sort</h2><table class="side-by-side"><tr><td>Path graph</td><td>Sorting by swapping <b>adjacent</b> elements</td></tr><tr><td>Min number of swaps</td><td>Number of <b>inversions</b> / cost of <b>bubble sort</b></td></tr></table><svg class="tokens r-stretch" viewBox="-10 -10 370 70" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="25"></line><line x1="150" y1="25" x2="200" y2="25"></line><line x1="250" y1="25" x2="300" y2="25"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="100" y="0" width="50" height="50"></rect><rect class="t3" x="200" y="0" width="50" height="50"></rect><rect class="t4" x="300" y="0" width="50" height="50"></rect><circle class="t4" cx="25" cy="25" r="16"></circle><circle class="t3" cx="125" cy="25" r="16"></circle><circle class="t2" cx="225" cy="25" r="16"></circle><circle class="t1" cx="325" cy="25" r="16"></circle></svg><div class="tokenswap fragment" data-fragment-index="1" data-swaps="4,3 4,2 4,1 3,2 3,1 2,1"></div></section><section><h2>History</h2><ul><li>Studied in discrete mathematics, theoretical computer science, network engineering, robot motion planning, game theory</li><li><cite>Cayley [1849]</cite> solved <b>clique</b> version</li><li><cite>Knuth [1968]</cite> solved <b>path</b> version</li><li>Also solved for cycles, stars, brooms, bicliques <!--, complete split graphs--></li></ul><ul class="fragment"><li><b>NP-complete</b> <cite>[Amir &amp; Porat 2015]</cite></li><li><b>APX-complete</b> with <b>4-approximation</b> <br> <cite>[Miltzow et al. 2016]</cite></li><li><b>W[1]-hard</b> with respect to number of swaps <cite>[Bonnet et al. 2018]</cite></li></ul></section><section><h2>Token Swapping in Trees</h2><svg class="tokens r-stretch" viewBox="-10 -10 370 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="65"></line><line x1="50" y1="125" x2="100" y2="85"></line><line x1="150" y1="75" x2="200" y2="75"></line><line x1="300" y1="25" x2="250" y2="65"></line><line x1="300" y1="125" x2="250" y2="85"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="0" y="100" width="50" height="50"></rect><rect class="t3" x="100" y="50" width="50" height="50"></rect><rect class="t4" x="200" y="50" width="50" height="50"></rect><rect class="t5" x="300" y="0" width="50" height="50"></rect><rect class="t6" x="300" y="100" width="50" height="50"></rect><circle class="t5" cx="25" cy="25" r="16"></circle><circle class="t1" cx="25" cy="125" r="16"></circle><circle class="t6" cx="125" cy="75" r="16"></circle><circle class="t4" cx="225" cy="75" r="16"></circle><circle class="t2" cx="325" cy="25" r="16"></circle><circle class="t3" cx="325" cy="125" r="16"></circle></svg><!--.tokenswap.fragment(data-swaps="2,4 2,6 2,1 1,5 3,6 3,5 4,5")--><div class="tokenswap fragment" data-swaps="2,4"></div><div class="tokenswap fragment" data-swaps="2,6"></div><div class="tokenswap fragment" data-swaps="2,1"></div><div class="tokenswap fragment" data-swaps="1,5"></div><div class="tokenswap fragment" data-swaps="3,6"></div><div class="tokenswap fragment" data-swaps="3,5"></div><div class="tokenswap fragment" data-swaps="4,5"></div></section><section><h2>History: Trees</h2><ul><li><cite>Akers &amp; Krishnamurthy [1989]</cite> first studied <b>tree</b> version as routing in proposed network topology</li><li>Three <b>2-approximation</b> algorithms <br> <cite>[Akers &amp; Krishnamurthy 1989; Vaughan 1991; Yamanaka et al. 2015]</cite></li><li>Family of algorithms (including past algorithms) cannot beat $4 \over 3$-approximation <cite>[Biniaz et al. 2019]</cite></li><p></p><li><u>OPEN</u>: NP-hard?</li><li><u>OPEN</u>: Better approximation?</li></ul></section><section><h2>Happy Leaf Conjecture</h2><ul><li><u>Conjecture</u>: <cite>[Vaughan 1991]</cite> Never need to swap a token that&rsquo;s already at destination leaf</li><li class="fragment" data-fragment-index="1"><u>Counterexample</u>: <cite>[Biniaz et al. 2019]</cite> <br> (smallest possible)</li></ul><svg class="tokens fragment" data-fragment-index="1" viewBox="-10 -10 870 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="25"></line><line x1="150" y1="25" x2="200" y2="25"></line><line x1="250" y1="25" x2="300" y2="25"></line><line x1="350" y1="25" x2="400" y2="25"></line><line x1="450" y1="25" x2="500" y2="25"></line><line x1="550" y1="25" x2="600" y2="25"></line><line x1="650" y1="25" x2="700" y2="25"></line><line x1="750" y1="25" x2="800" y2="25"></line><line x1="225" y1="50" x2="225" y2="100"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="100" y="0" width="50" height="50"></rect><rect class="t3" x="200" y="0" width="50" height="50"></rect><rect class="t4" x="300" y="0" width="50" height="50"></rect><rect class="t5" x="400" y="0" width="50" height="50"></rect><rect class="t6" x="500" y="0" width="50" height="50"></rect><rect class="t7" x="600" y="0" width="50" height="50"></rect><rect class="t8" x="700" y="0" width="50" height="50"></rect><rect class="t9" x="800" y="0" width="50" height="50"></rect><rect class="t10" x="200" y="100" width="50" height="50"></rect><circle class="t9" cx="25" cy="25" r="16"></circle><circle class="t8" cx="125" cy="25" r="16"></circle><circle class="t7" cx="225" cy="25" r="16"></circle><circle class="t6" cx="325" cy="25" r="16"></circle><circle class="t5" cx="425" cy="25" r="16"></circle><circle class="t4" cx="525" cy="25" r="16"></circle><circle class="t3" cx="625" cy="25" r="16"></circle><circle class="t2" cx="725" cy="25" r="16"></circle><circle class="t1" cx="825" cy="25" r="16"></circle><circle class="t10" cx="225" cy="125" r="16"></circle></svg><div class="tokenswap fragment" data-swaps="10,7 10,8 10,9"></div><div class="tokenswap fragment" data-swaps="9,8 9,6 9,5 9,4 9,3 9,2 9,1"></div><div class="tokenswap fragment" data-swaps="8,6 8,5 8,4 8,3 8,2 8,1"></div><div class="tokenswap fragment" data-swaps="7,5 7,4 7,3 7,2 7,1"></div><div class="tokenswap fragment" data-swaps="6,4 6,3 6,2 6,1"></div><div class="tokenswap fragment" data-swaps="5,3 5,2 5,1"></div><div class="tokenswap fragment" data-swaps="4,2 4,1"></div><div class="tokenswap fragment" data-swaps="1,2 1,10 2,10 3,10"></div><ul><li class="fragment">Any algorithm satisfying conjecture cannot beat $4 \over 3$-approximation <cite>[Biniaz et al. 2019]</cite></li></ul></section><section><h2>Our Results</h2><ul><li><span class="fragment highlight-green">Token swapping is <b>NP-hard on trees</b></span><ul><li>Also for <b>parallel</b> token swapping, where we can swap a matching in each round</li></ul></li><li>Algorithms that stay <b>within 1 of shortest path</b> cannot beat 2-approximation</li></ul><svg class="tokens r-stretch" viewBox="-10 -10 370 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="65"></line><line x1="50" y1="125" x2="100" y2="85"></line><line x1="150" y1="75" x2="200" y2="75"></line><line x1="300" y1="25" x2="250" y2="65"></line><line x1="300" y1="125" x2="250" y2="85"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="0" y="100" width="50" height="50"></rect><rect class="t3" x="100" y="50" width="50" height="50"></rect><rect class="t4" x="200" y="50" width="50" height="50"></rect><rect class="t5" x="300" y="0" width="50" height="50"></rect><rect class="t6" x="300" y="100" width="50" height="50"></rect><circle class="t5" cx="25" cy="25" r="16"></circle><circle class="t1" cx="25" cy="125" r="16"></circle><circle class="t6" cx="125" cy="75" r="16"></circle><circle class="t4" cx="225" cy="75" r="16"></circle><circle class="t2" cx="325" cy="25" r="16"></circle><circle class="t3" cx="325" cy="125" r="16"></circle></svg><!--.tokenswap.fragment(data-fragment-index="1", data-swaps="2,4 2,6 2,1 1,5 3,6 3,5 4,5")--></section><section><h2>Reduction from Star Subseq.</h2><ul><li>Rephrasing/simplification of Garey &amp; Johnson's &ldquo;MS6: Permutation Generation&rdquo;:</li><ul><li>Given tokens&rsquo; start/destination on <b>$\bm n$-star</b></li><li>Given <b>sequence</b> of edges (incident to center)</li><li>Can you get from start to destination<br>via swaps that form a <b>subsequence</b>?</li></ul></ul><div class="columns r-stretch"><div class="column fill justify-content-center" style="flex-grow: 2"><svg class="tokens" viewBox="-10 -10 270 170"><line x1="50" y1="25" x2="100" y2="65"></line><line x1="50" y1="125" x2="100" y2="85"></line><line x1="200" y1="25" x2="150" y2="65"></line><line x1="200" y1="125" x2="150" y2="85"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t3" x="0" y="100" width="50" height="50"></rect><rect class="t9" x="100" y="50" width="50" height="50"></rect><rect class="t5" x="200" y="0" width="50" height="50"></rect><rect class="t7" x="200" y="100" width="50" height="50"></rect><circle class="t7" cx="25" cy="25" r="16"></circle><circle class="t5" cx="25" cy="125" r="16"></circle><circle class="t9" cx="125" cy="75" r="16"></circle><circle class="t1" cx="225" cy="25" r="16"></circle><circle class="t3" cx="225" cy="125" r="16"></circle></svg><!--.tokenswap.fragment(data-swaps="7,9 7,3 3,5 5,1 1,9")--><div class="tokenswap fragment" data-fragment-index="1" data-swaps="7,9"></div><div class="tokenswap fragment" data-fragment-index="2" data-swaps="7,3"></div><div class="tokenswap fragment" data-fragment-index="3" data-swaps="3,5"></div><div class="tokenswap fragment" data-fragment-index="4" data-swaps="5,1"></div><div class="tokenswap fragment" data-fragment-index="5" data-swaps="1,9"></div></div><div class="column fill justify-content-center"><ol><li class="fragment highlight-green" data-fragment-index="1"><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li><li><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t3" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li><li><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t5" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li><li class="fragment highlight-green" data-fragment-index="2"><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t7" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li></ol></div><div class="column fill justify-content-center"><ol start="5"><li class="fragment highlight-green" data-fragment-index="3"><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t3" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li><li><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t7" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li><li class="fragment highlight-green" data-fragment-index="4"><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t5" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li><li class="fragment highlight-green" data-fragment-index="5"><svg class="tokens" viewBox="-10 -10 170 70" height="70px"><line x1="50" y1="25" x2="100" y2="25"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t9" x="100" y="0" width="50" height="50"></rect></svg></li></ol></div></div></section><section><h2>0/1-Weighted Token Swapping</h2><ul><li>Each token $t$ has a weight $w(t) \in \{0,1\}$</li><li>Cost of swapping $t \leftrightarrow t'$ is $w(t) + w(t')$</li></ul><svg class="tokens" viewBox="-510 -10 795 370"><!-- Path--><line x1="-475" y1="150" x2="-475" y2="200"></line><line x1="-475" y1="50" x2="-475" y2="100"></line><line x1="-450" y1="25" x2="-400" y2="25"></line><line x1="-350" y1="25" x2="-300" y2="25"></line><line x1="-250" y1="25" x2="-200" y2="25"></line><line x1="-150" y1="25" x2="-100" y2="25"></line><line x1="-50" y1="25" x2="0" y2="25"></line><!-- Root--><line x1="25" y1="50" x2="25" y2="100"></line><!-- Star--><line x1="0" y1="125" x2="-200" y2="200"></line><line x1="0" y1="150" x2="-50" y2="200"></line><line x1="50" y1="150" x2="100" y2="200"></line><line x1="50" y1="125" x2="250" y2="200"></line><!-- Below star--><line x1="-200" y1="250" x2="-200" y2="300"></line><line x1="-50" y1="250" x2="-50" y2="300"></line><line x1="100" y1="250" x2="100" y2="300"></line><line x1="250" y1="250" x2="250" y2="300"></line><!-- Free--><line x1="-250" y1="250" x2="-225" y2="225"></line><line x1="-100" y1="250" x2="-75" y2="225"></line><line x1="50" y1="250" x2="75" y2="225"></line><line x1="200" y1="250" x2="225" y2="225"></line><!-- Path--><rect class="t11" x="-500" y="200" width="50" height="50"></rect><rect class="t12" x="-500" y="100" width="50" height="50"></rect><rect class="t13" x="-500" y="0" width="50" height="50"></rect><rect class="t14" x="-400" y="0" width="50" height="50"></rect><rect class="t15" x="-300" y="0" width="50" height="50"></rect><rect class="t16" x="-200" y="0" width="50" height="50"></rect><rect class="t17" x="-100" y="0" width="50" height="50"></rect><rect class="t18" x="0" y="0" width="50" height="50"></rect><!-- Root--><rect class="t9" x="0" y="100" width="50" height="50"></rect><!-- Star--><rect class="t19" x="-225" y="200" width="50" height="50"></rect><rect class="t22" x="-75" y="200" width="50" height="50"></rect><rect class="t20" x="75" y="200" width="50" height="50"></rect><rect class="t21" x="225" y="200" width="50" height="50"></rect><!-- Star second level--><rect class="t26" x="-225" y="300" width="50" height="50"></rect><rect class="t25" x="-75" y="300" width="50" height="50"></rect><rect class="t24" x="75" y="300" width="50" height="50"></rect><rect class="t23" x="225" y="300" width="50" height="50"></rect><!-- Free--><rect class="t1" x="-300" y="250" width="50" height="50"></rect><rect class="t3" x="-150" y="250" width="50" height="50"></rect><rect class="t5" x="0" y="250" width="50" height="50"></rect><rect class="t7" x="150" y="250" width="50" height="50"></rect><!-- Path--><circle class="t19" cx="-475" cy="225" r="16"></circle><circle class="t20" cx="-475" cy="125" r="16"></circle><circle class="t21" cx="-475" cy="25" r="16"></circle><circle class="t22" cx="-375" cy="25" r="16"></circle><circle class="t23" cx="-275" cy="25" r="16"></circle><circle class="t24" cx="-175" cy="25" r="16"></circle><circle class="t25" cx="-75" cy="25" r="16"></circle><circle class="t26" cx="25" cy="25" r="16"></circle><!-- Root--><circle class="t9" cx="25" cy="125" r="16"></circle><!-- Star--><circle class="t11" cx="-200" cy="225" r="16"></circle><circle class="t12" cx="-50" cy="225" r="16"></circle><circle class="t13" cx="100" cy="225" r="16"></circle><circle class="t14" cx="250" cy="225" r="16"></circle><!-- Star second level--><circle class="t18" cx="-200" cy="325" r="16"></circle><circle class="t15" cx="-50" cy="325" r="16"></circle><circle class="t17" cx="100" cy="325" r="16"></circle><circle class="t16" cx="250" cy="325" r="16"></circle><!-- Free--><circle class="t7" cx="-275" cy="275" r="16"></circle><circle class="t5" cx="-125" cy="275" r="16"></circle><circle class="t1" cx="25" cy="275" r="16"></circle><circle class="t3" cx="175" cy="275" r="16"></circle><!-- Weights (must come after actual tokens)--><foreignObject x="100" y="0" width="300" height="150" transform="scale(0.75)"><div>$w(~~~~~~) = 1$</div><div>$w(~~~~~~) = 0$</div></foreignObject><circle class="t12" cx="157" cy="15" r="16"></circle><circle class="t15" cx="162" cy="20" r="16"></circle><circle class="t18" cx="167" cy="25" r="16"></circle><circle class="t22" cx="172" cy="30" r="16"></circle><circle class="t26" cx="177" cy="35" r="16"></circle><circle class="t1" cx="157" cy="63" r="16"></circle><circle class="t3" cx="162" cy="68" r="16"></circle><circle class="t5" cx="167" cy="73" r="16"></circle><circle class="t7" cx="172" cy="78" r="16"></circle><circle class="t9" cx="177" cy="83" r="16"></circle></svg><div class="tokenswap fragment" data-swaps="11,9 11,26 11,25 11,24 11,23 11,22 11,21 11,20 11,19"></div><div class="tokenswap fragment" data-swaps="7,9"></div><div class="tokenswap fragment" data-swaps="26,7 26,18"></div><div class="tokenswap fragment" data-swaps="12,7 12,25 12,24 12,23 12,22 12,21 12,20 12,19"></div><div class="tokenswap fragment" data-swaps="25,7 25,15"></div><div class="tokenswap fragment" data-swaps="13,7 13,24 13,23 13,22 13,21 13,20 13,19 7,24 24,17"></div><div class="tokenswap fragment" data-swaps="14,7 14,23 14,22 14,21 14,20 14,19 7,3 3,23 23,16"></div><div class="tokenswap fragment" data-swaps="15,3 15,22 15,21 15,20 15,19 3,5 5,22"></div><div class="tokenswap fragment" data-swaps="16,5 16,21 16,20 16,19 5,21"></div><div class="tokenswap fragment" data-swaps="17,5 17,20 17,19 5,1 1,20"></div><div class="tokenswap fragment" data-swaps="18,1 18,19 1,9 9,19"></div></section><section><h2>Unweighted Token Swapping</h2><ul><li><u>Idea</u>: Simulate each weight-1 token<br>with long path of tokens<ul><li>Increase cost gap between<br>&ldquo;good&rdquo; and &ldquo;bad&rdquo; solutions</li><li>$\leq n$ swaps from weight-0 tokens negligible</li></ul></li><p></p><li><u>Challenge</u>: Slack $\Rightarrow$ options no longer forced</li></ul></section><section><h1 style="font-variant: small-caps; font-size: 2em">Characterizing Universal Reconfigurability of Modular Pivoting Robots</h1><hr><h4>Hugo&nbsp;Akitaya<span class="sep">&bull;</span><u>Erik&nbsp;Demaine</u><span class="sep">&bull;</span>Andrei&nbsp;Gonczi<span class="sep">&bull;</span>Dylan&nbsp;Hendrickson<span class="sep">&bull;</span>Adam&nbsp;Hesterberg<span class="sep">&bull;</span>Matias&nbsp;Korman<span class="sep">&bull;</span>Oliver&nbsp;Korten<span class="sep">&bull;</span>Jayson&nbsp;Lynch<span class="sep">&bull;</span>Irene&nbsp;Parada<span class="sep">&bull;</span>Vera&nbsp;Sacristán</h4><div class="columns"><svg class="column" viewBox="-0.1 -0.1 2.2 3.2" style="height: 150px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="1" y="2" width="1" height="1"></rect><rect class="robot r1 rotate-90" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 150px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="empty" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="bad" x="2" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="2" width="1" height="1"></rect><rect class="bad" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot r1 rotate-180" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 150px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="empty" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="empty" x="1" y="2" width="1" height="1"></rect><rect class="empty" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="2" y="1" width="1" height="1"></rect><rect class="robot r1 rotate-90" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 150px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="bad" x="2" y="1" width="1" height="1"></rect><rect class="empty" x="1" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="2" y="2" width="1" height="1"></rect><g class="rotate-90-2o2" style="transform-origin: 2px 2px"><rect class="robot r1 rotate-90-1o2" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect></g><circle class="pivotCenter show-first-half" cx="1" cy="2" r="0.15"></circle><circle class="pivotCenter show-second-half" cx="2" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 150px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="empty" x="2" y="1" width="1" height="1"></rect><rect class="empty" x="1" y="2" width="1" height="1"></rect><rect class="empty" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="2" y="0" width="1" height="1"></rect><g class="rotate-90-2o2" style="transform-origin: 2px 1px"><rect class="robot r1 rotate-90-1o2" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect></g><circle class="pivotCenter show-first-half" cx="1" cy="2" r="0.15"></circle><circle class="pivotCenter show-second-half" cx="2" cy="1" r="0.15"></circle></svg></div></section><svg class="hidden"><!-- Diagonal hatching: scaling of https://stackoverflow.com/a/22643745--><pattern id="hatch" width="0.12" height="0.12" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse"><line y2="0.12" stroke="var(--bad-color)" stroke-width=".09"></line></pattern></svg><section><h2>Reconfiguration by Pivots</h2><ul><li>Given two configurations of $n$ <b>robots/modules</b></li><li class="fragment" data-fragment-index="1">Reconfigure via a sequence of <b>pivots</b></li><li class="fragment">Maintain <b>connectivity</b> via edges <i>throughout</i><div style="font-size: 80%">(including during pivot, except for the pivoted robot)</div></li></ul><div class="columns r-stretch"><div class="column fill robots">.....
+.OOO.
+.O...
+.OOO.
+.O.O.
+.OOO.
+.....</div><div class="column arrow"></div><div class="column fill fragment robots" id="anim69" data-fragment-index="1">.....
+.OOO.
+.O...
+.OOO.
+.O.O.
+.OOO.
+.....</div><div class="column arrow"></div><div class="column fill robots">.....
+.OOO.
+.O.O.
+.OOO.
+...O.
+.OOO.
+.....</div><div class="robotpivot fragment" data-fragment-index="2" data-target="anim69" data-pivots="1,5/-180@2,6/-90@3,6/-180@4,6/-90@4,5/-90@4,4"></div><div class="robotpivot fragment" data-fragment-index="3" data-target="anim69" data-pivots="1,5/-180@4,3/180@4,3"></div><div class="robotpivot fragment" data-fragment-index="4" data-target="anim69" data-pivots="3,1/-180@3,1 1,5/-180@4,3 3,1/180@3,1"></div><div class="robotpivot fragment" data-fragment-index="5" data-target="anim69" data-pivots="1,4/-90@2,5"></div></div></section><section><h2>Square Pivoting Models</h2><div class="columns"><div class="column"><div class="columns"><svg class="column" viewBox="-0.1 -0.1 2.2 3.2" style="height: 250px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="1" y="2" width="1" height="1"></rect><rect class="robot r1 rotate-90" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 250px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="empty" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="bad" x="2" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="2" width="1" height="1"></rect><rect class="bad" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot r1 rotate-180" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg></div><p>Restricted moves</p></div><div class="column fragment"><svg viewBox="-0.1 -0.1 3.2 3.2" style="height: 250px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="empty" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="empty" x="1" y="2" width="1" height="1"></rect><rect class="empty" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="2" y="1" width="1" height="1"></rect><rect class="robot r1 rotate-90" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg><p>Leapfrog move</p></div></div><div class="fragment"><div class="columns justify-content-center"><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 250px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="bad" x="2" y="1" width="1" height="1"></rect><rect class="empty" x="1" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="2" y="2" width="1" height="1"></rect><g class="rotate-90-2o2" style="transform-origin: 2px 2px"><rect class="robot r1 rotate-90-1o2" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect></g><circle class="pivotCenter show-first-half" cx="1" cy="2" r="0.15"></circle><circle class="pivotCenter show-second-half" cx="2" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 250px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="empty" x="2" y="1" width="1" height="1"></rect><rect class="empty" x="1" y="2" width="1" height="1"></rect><rect class="empty" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="2" y="0" width="1" height="1"></rect><g class="rotate-90-2o2" style="transform-origin: 2px 1px"><rect class="robot r1 rotate-90-1o2" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect></g><circle class="pivotCenter show-first-half" cx="1" cy="2" r="0.15"></circle><circle class="pivotCenter show-second-half" cx="2" cy="1" r="0.15"></circle></svg></div><p>Monkey moves</p></div></section><section><h2>Hexagon Pivoting Models</h2><div class="columns r-stretch"><div class="column fill"><svg viewBox="-1.35 -0.9660254037844387 2.7 2.798076211353316"><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,-0.43301270189221935)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,0.43301270189221935)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,1.299038105676658)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0,0.8660254037844387)"></polygon><polygon class="robot" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(-0.75,0.43301270189221935)"></polygon><polygon class="robot r1 rotate-120" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" style="transform-origin: -0.25px 0.43301270189221935px"></polygon><circle class="pivotCenter" cx="-0.25" cy="0.43301270189221935" r="0.12"></circle></svg><p>Restricted move</p></div><div class="column space"></div><div class="column fill"><svg viewBox="-1.35 -0.9660254037844387 2.7 2.798076211353316"><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,-0.43301270189221935)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,0.43301270189221935)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0,0.8660254037844387)"></polygon><polygon class="robot" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,1.299038105676658)"></polygon><polygon class="robot" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(-0.75,0.43301270189221935)"></polygon><g class="rotate-60-2o2" style="transform-origin:0.5px 0.8660254037844387px"><polygon class="robot r1 rotate-60-1o2" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" style="transform-origin: -0.25px 0.43301270189221935px"></polygon></g><circle class="pivotCenter show-first-half" cx="-0.25" cy="0.43301270189221935" r="0.12"></circle><circle class="pivotCenter show-second-half" cx="0.5" cy="0.8660254037844387" r="0.12"></circle></svg><p>Monkey move</p></div></div></section><section><h2>Known Results: Hexagons</h2><ul><li>Restricted moves are <b>universal</b> if no <b>forbidden pattern</b><span class="space"></span><cite>[Nguyen, Guibas, Kim 2001]</cite></li></ul><div class="columns r-stretch"><div class="column fill"><svg viewBox="-1.35 -0.9660254037844387 2.7 2.798076211353316"><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,-0.43301270189221935)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,0.43301270189221935)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,1.299038105676658)"></polygon><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0,0.8660254037844387)"></polygon><polygon class="robot" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(-0.75,0.43301270189221935)"></polygon><polygon class="robot r1 rotate-120" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" style="transform-origin: -0.25px 0.43301270189221935px"></polygon><circle class="pivotCenter" cx="-0.25" cy="0.43301270189221935" r="0.12"></circle></svg><p>Restricted move</p></div><div class="column fill"><svg viewBox="-1.35 -0.9660254037844387 2.7 2.798076211353316"><polygon class="bad" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0, 0.43301270189221935)"></polygon><polygon class="robot" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(-0.75,0)"></polygon><polygon class="robot" points="0.5,0 0.25,0.43301270189221935 -0.25,0.43301270189221935 -0.5,0 -0.25,-0.43301270189221935 0.25,-0.43301270189221935" transform="translate(0.75,0.8660254037844387)"></polygon></svg><p>Forbidden pattern</p></div></div></section><section><h2>Known Results: Squares</h2><ul><li>Restricted moves are <b>universal</b> if no <b>forbidden pattern</b><span class="space"></span><cite>[Sung, Bern, Romanishin, Rus 2015]</cite></li><li class="fragment">Restricted moves are <b>universal</b> given 5 <b>extra robots</b> on external boundary<span class="space"></span><cite>[Akitaya, Arkin, Damian, Demaine, Dujmović, Flatland, Korman, Palop, Parada, van Renssen, Sacristán 2019]</cite></li></ul><div class="columns r-stretch"><div class="column"><div class="columns"><svg class="column" viewBox="-0.1 -0.1 2.2 3.2" style="height: 200px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot" x="1" y="2" width="1" height="1"></rect><rect class="robot r1 rotate-90" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 3.2" style="height: 200px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="empty" x="2" y="0" width="1" height="1"></rect><rect class="bad" x="0" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="bad" x="2" y="1" width="1" height="1"></rect><rect class="bad" x="1" y="2" width="1" height="1"></rect><rect class="bad" x="2" y="2" width="1" height="1"></rect><rect class="robot" x="0" y="2" width="1" height="1"></rect><rect class="robot r1 rotate-180" x="0" y="1" width="1" height="1" style="transform-origin: 1px 2px"></rect><circle class="pivotCenter" cx="1" cy="2" r="0.15"></circle></svg></div><p>Restricted moves</p></div><div class="column"><div class="columns"><svg class="column" viewBox="-0.1 -0.1 2.2 2.2" style="height: 133.333px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="robot" x="0" y="1" width="1" height="1"></rect><rect class="robot" x="1" y="0" width="1" height="1"></rect></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 1.2" style="height: 66.666px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="2" y="0" width="1" height="1"></rect><rect class="robot" x="1" y="0" width="1" height="1"></rect></svg><div class="column space"></div><svg class="column" viewBox="-0.1 -0.1 3.2 2.2" style="height: 133.333px"><rect class="bad" x="0" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="0" width="1" height="1"></rect><rect class="bad" x="1" y="1" width="1" height="1"></rect><rect class="bad" x="2" y="1" width="1" height="1"></rect><rect class="robot" x="0" y="1" width="1" height="1"></rect><rect class="robot" x="2" y="0" width="1" height="1"></rect></svg></div><p>Forbidden patterns</p></div></div></section><section><h2>Our Results</h2><ul><li>No forbidden patterns or extra robots</li></ul><p></p><table><tr><th>Model:</th><th>Restricted</th><th>Restricted + Leapfrog</th><th>Restricted + Leapfrog + Monkey</th></tr><tr><th>Hexagons</th><td>PSPACE-hard</td><td><svg width="225px" height="100px" viewBox="0 0 2.25 1"><rect width="100%" height="100%" fill="url(#hatch)"></rect></svg></td><td>Universal:<span style="font-size: 90%">$O(n^3)$ moves</span></td></tr><tr><th>Squares</th><td>PSPACE-hard</td><td>PSPACE-hard</td><td>PSPACE-hard</td></tr></table></section><section><!--h2 Hexagon Model Intuition--><h2>Restricted vs. Monkey Moves</h2><ul><li>Some configurations are <b>rigid</b> under restricted moves<span class="space"></span><cite>[Nguyen, Guibas, Kim 2001]</cite></li><li class="fragment" data-fragment-index="4">Monkey moves unlock these examples</li></ul><div class="hexrobots r-stretch" id="rigidhex"> . . . . . . O . 
+. . . . . . O O .
+ . . . . . O . O 
+. O . . . . . . .
+ O O . O O O O O 
+. . . O O O . . .
+ O O O . . . O O 
+. . . . . . . O .
+ O . O . . . . . 
+. O O . . . . . .
+ . O . . . . . . 
+. . . . . . . . .</div><div class="robotpivot fragment" data-fragment-index="1" data-target="rigidhex" data-pivots="5,6/120@TR5,6/-120@TR5,6"></div><div class="robotpivot fragment" data-fragment-index="2" data-target="rigidhex" data-pivots="3,6/120@TL3,6/-120@TL3,6"></div><div class="robotpivot fragment" data-fragment-index="3" data-target="rigidhex" data-pivots="3,6/-120@TR3,6/120@TR3,6"></div><div class="robotpivot fragment" data-target="rigidhex" data-pivots="3,6/-60@TR3,6/-60@TR4,7"></div></section><section><h2>Hexagon Algorithm Overview</h2><div class="columns r-stretch"><div class="column fill"><ul><li><u>Goal</u>: <b>Canonicalize</b><br>into vertical strip</li></ul></div><div class="column h-100 hexrobots">. . . . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+</div></div></section><section><h2>Hexagon Algorithm Overview</h2><div class="columns r-stretch"><div class="column fill"><ul><li><u>Goal</u>: <b>Canonicalize</b><br>into vertical strip</li><p></p><li>If a robot is<ul><li>on the <b>convex hull</b>,</li><li>whose removal <b>preserves connectivity</b>,</li></ul>then can pivot robot directly to vertical strip</li><li class="fragment">Otherwise, we need to make such a robot&hellip;</li></ul></div><div class="column h-100 hexrobots" id="hexcanon">. . . . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . O O .
+. O O O .
+ 1 . O O
+. O O O .
+ O O . O
+. O . . .
+ O . . O
+. . . . .
+ O . O O
+. O O O .
+ . O O .
+. . O . .
+ . . . .</div><div class="robotpivot fragment" data-fragment-index="1" data-target="hexcanon" data-pivots="1,9/120@TR1,9/120@R1,7/120@R2,6/120@TR3,5/120@TR3,3/120@R3,1"></div></div></section><section><h2>Hexagon Algorithm: Phase 1</h2><ul><li>Remove degree-1 vertices</li></ul><div class="hexrobots r-stretch" id="remove-leaves">. . . . .
+ . O O . .
+. O O O .
+ . . . . .
+. O 1 O 1
+ O . . O .
+. . . . .
+ O . . O .
+. O . O .
+ . . . O .
+. O O O .
+ . O . . .
+. . O . .
+ . . . . .</div><div class="robotpivot fragment" data-target="remove-leaves" data-pivots="8,4/120@BL8,4"></div><div class="robotpivot fragment" data-target="remove-leaves" data-pivots="4,4/60@TL4,4/60@TL3,5"></div><div class="robotpivot fragment" data-target="remove-leaves" data-pivots="4,4/60@L3,5/60@L3,7/60@BL3,7/60@BL4,8"></div><div class="robotpivot fragment" data-target="remove-leaves" data-pivots="4,4/60@BR4,8/60@BR5,7 4,10/-120@L4,10 4,4/-120@BR5,7"></div></section><section><!--h2 Hexagon Algorithm: Phase 1--><div class="r-stretch"><img class="big invert pop" src="degree1.svg"><div style="position: absolute; left: 0.5em; top: 0.5em;">Case analysis</div></div></section><section><h2>Hexagon Algorithm: Phase 2</h2><ul><li><b>2-connected components</b> connected by <b>bridges</b></li><li><b>Merge</b> leaf 2-connected component into others</li></ul><div class="hexrobots r-stretch" id="merge-leaf">. . . . . . . . 
+ . . . . . . . .
+. . . . . . 1 . 
+ . . . . . 1 . .
+. . . . . . 1 . 
+ . . . . . 1 . .
+. . O . O . 1 . 
+ . O O O O . . .
+. O . O . O 2 . 
+ . . . . . O . .
+. O . O O O . . 
+ 2 O O O O . 1 .
+. . O . . . 1 1 
+ 1 . . . 2 1 . .
+. 1 . . . . 1 1 
+ 1 1 . . 2 1 . .
+. 1 . . . 2 1 1 
+ . . . . . . 1 .
+. . . . . . . . </div><div class="robotpivot fragment" data-target="merge-leaf" data-pivots="2,16/-120@R2,16/-120@TR3,17/-120@TL4,16"></div><div class="robotpivot fragment" data-target="merge-leaf" data-pivots="12,2/-120@L12,2/-120@BL11,1/-120@BR10,2/-60@BR10,4/-60@BR9,5"></div><div class="robotpivot fragment" data-target="merge-leaf" data-pivots="11,3/-120@BL11,3"></div><div class="robotpivot fragment" data-target="merge-leaf" data-pivots="13,11/-60@L13,11/-60@L13,9 12,12/60@BR12,12/60@BR13,11"></div></section><section><!--h2 Hexagon Algorithm: Phase 2--><div class="r-stretch"><img class="big invert pop" src="merge-example.svg"><div style="position: absolute; left: 0.5em; top: 30.5%;">Merge procedure</div></div></section><section><h2>Hexagon Algorithm: Phase 3</h2><div class="columns r-stretch"><div class="column fill"><ul><li>Now 2-connected</li><li>Using a modified merge procedure, can produce a robot<ul><li>on the convex hull,</li><li>whose removal <b>preserves 2-connectivity</b></li></ul></li><li>Pivot robot directly to vertical strip</li></ul></div><div class="column h-100 hexrobots" id="phase3">. . . . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . . . .
+. . O . .
+ . O O .
+. O O O .
+ 1 . O O
+. O O O .
+ O O . O
+. O . . .
+ O . . O
+. . . . .
+ O . O O
+. O O O .
+ . O O .
+. . O . .
+ . . . .</div><div class="robotpivot fragment" data-target="phase3" data-pivots="1,9/120@TR1,9/120@R1,7/120@R2,6/120@TR3,5/120@TR3,3/120@R3,1"></div></div></section><section><h2>Hexagon Algorithm Analysis</h2><ul><li><u>Phase 1</u> (leaf removal): $O(n^2)$ moves</li><li><u>Phase 2</u> (merging 2-connected components):<ul><li>$O(n^2)$ moves per 2-connected component</li><li>$\Rightarrow O(n^3)$ overall</li></ul></li><li><u>Phase 3</u> (canonicalization):<ul><li>$O(n^2)$ moves per robot $\Rightarrow O(n^3)$ overall</li><li>$\Rightarrow O(n^3)$ moves overall</li></ul></li><li>$\Rightarrow O(n^3)$ moves overall</li><p></p><li class="fragment" data-fragment-index="1"><u>OPEN</u>: Do $O(n^2)$ moves suffice?</li><li class="fragment" data-fragment-index="1"><u>OPEN</u>: How fast with parallel moves?</li></ul></section><section><h2>Our Results</h2><ul><li>No forbidden patterns or extra robots</li></ul><p></p><table><tr><th>Model:</th><th>Restricted</th><th>Restricted + Leapfrog</th><th>Restricted + Leapfrog + Monkey</th></tr><tr><th>Hexagons</th><td>PSPACE-hard</td><td><svg width="225px" height="100px" viewBox="0 0 2.25 1"><rect width="100%" height="100%" fill="url(#hatch)"></rect></svg></td><td>Universal:<span style="font-size: 90%">$O(n^3)$ moves</span></td></tr><tr><th>Squares</th><td>PSPACE-hard</td><td>PSPACE-hard</td><td>PSPACE-hard</td></tr></table></section><section><h2>Motion-Planning-Through-Gadgets Framework</h2><ul><li>Which <b>local finite-state gadgets</b> suffice to prove <b>single-agent</b> motion planning <b>PSPACE-complete</b>?<span class="space"></span><span style="font-size: 80%"><cite>[Demaine, Grosof, Lynch, Rudoy 2018]</cite><span class="sep">&bull;</span><cite>[Demaine, Hendrickson, Lynch 2020]</cite><span class="sep">&bull;</span><cite>[Ani, Bosboom, Demaine, Diomidov, Hendrickson, Lynch 2020]</cite><span class="sep">&bull;</span><cite>[Ani, Demaine, Hendrickson, Lynch 2021]</cite></span></li></ul><div class="columns r-stretch"><div class="column"><p></p><ul><li><u>Example</u>:<br><b>Locking 2-toggle</b></li></ul></div><div class="column fill" style="margin-top: -25px"><img class="big invert pop bright" src="L2T_states.svg"></div><div class="column invert pop bright" style="margin-top: -25px"><svg id="L2T" viewBox="-0.5 5 87 144" width="100%" height="100%"><rect x="2" y="37" width="80" height="80" rx="12" ry="12" fill="#000000" stroke="#000000" stroke-width="4" transform="translate(2,3)" opacity="0.25"></rect><rect x="2" y="37" width="80" height="80" rx="12" ry="12" fill="#e1d5e7" stroke="#000000" stroke-width="4"></rect><path class="leftSegment" d="M 22 37 L 22 115" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="leftDown" d="M 22 114.76 L 14 98.76 L 22 102.76 L 30 98.76 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="leftUp" d="M 22 39.24 L 30 55.24 L 22 51.24 L 14 55.24 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" opacity="0"></path><path class="rightSegment" d="M 62 37 L 62 115" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="rightDown" d="M 62 114.76 L 54 98.76 L 62 102.76 L 70 98.76 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="rightUp" d="M 62 39.24 L 70 55.24 L 62 51.24 L 54 55.24 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" opacity="0"></path><circle class="agent" cx="22" cy="20" r="10" fill="hsl(57.4, 50%, 50%)" stroke="hsl(57.4, 40%, 40%)"></circle></svg></div></div><div class="fragment L2T" data-target="L2T" data-step="0"></div><div class="fragment L2T" data-target="L2T" data-step="1"></div><div class="fragment L2T" data-target="L2T" data-step="2"></div><div class="fragment L2T" data-target="L2T" data-step="3"></div><div class="fragment L2T" data-target="L2T" data-step="4"></div></section><section><div class="columns r-stretch"><div class="column fill hexrobots" id="hexL2T"> . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . .
+ . . . . . . . O O . . . . . . . 
+2 . . . . O . O O O . O . . . . 2
+ 2 . . . O O O . . O O O . . . 2 
+. 2 . . O . O . O . O . O . . 2 .
+ 1 2 . O . . . O O . . . O . 2 . 
+. 1 2 O . 2 . O . O . 2 . O 2 . .
+ . . 2 . 2 2 O . . O 2 2 . 2 . . 
+. . . 2 . . . . . . . . . 2 . . .
+ . . . 2 . 2 O . . O 2 . 2 . . . 
+. . . . 2 2 . . . . . 2 2 . . . .
+ . . . . 2 . O . . O . 2 . . . . 
+. . . . . . 1 O . O 1 . . . . . .
+ . O . . . . . O O . . . . . O . 
+. O O . . . O . . . O . . . O O .
+ O . O . . O O O O O O . . O . O 
+. . . . . O . . . . . O . . . . .
+ O O O . O . . O O . . O . O O O 
+. . . . O . O O . O O . O . . . .
+ O O O O O . O . . O . O O O O O 
+. O . . . O . . . . . O . . . O .
+ . . O O . O . . . . O . O O . . 
+. . . . . . O . . . O . . . . . .
+ . . O O O . O . . O . O O O . . 
+. . . . . O . O . O . O . . . . .
+ . . O O . . . O O . . . O O . . 
+. . . . O O . . O . . O O . . . .
+ . . O . O . . . . . . O . O . . 
+. . . . . . . . O . . . . . . . .
+ . . O . . O . . . . O . . O . . 
+. . . . O O O . O . O O O . . . .
+ . . O O O . O . . O . O O O . . 
+. O . . . . . . O . . . . . . O .
+ O O O O . O O . . O O . O O O O 
+. . . . O . O . O . O . O . . . .
+ O O O . O . . . . . . O . O O O 
+. . . . 1 O . . O . . O 1 . . . .
+ O . O 1 . O . . . . O . 1 O . O 
+. O O 1 . . O . O . O . . 1 O O .
+ . O . . . . O . . O . . . . O . 
+. . . . . . . O O O . . . . . . .
+ . . . . 2 . . O O . . 2 . . . . 
+. . . . 2 2 . . O . . 2 2 . . . .
+ . . . 2 . 2 . . . . 2 . 2 . . . 
+. . . 2 . . . . O . . . . 2 . . .
+ . . 2 . 2 2 . O O . 2 2 . 2 . . 
+. . 2 O . 2 . O . O . 2 . O 2 . .
+ . 2 . O . . O . . O . . O . 2 . 
+. 2 . . O . O . . . O . O . . 2 .
+ 2 . . . O O . . . . O O . . . 2 
+2 . . . . O . . . . . O . . . . 2
+ . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . .</div><div class="column invert bright pop" style="text-align: right"><svg id="hexL2Tdiagram" viewBox="-0.5 5 87 144" width="80%" height="100%"><rect x="2" y="37" width="80" height="80" rx="12" ry="12" fill="#000000" stroke="#000000" stroke-width="4" transform="translate(2,3)" opacity="0.25"></rect><rect x="2" y="37" width="80" height="80" rx="12" ry="12" fill="#e1d5e7" stroke="#000000" stroke-width="4"></rect><path class="leftSegment" d="M 22 37 L 22 115" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="leftDown" d="M 22 114.76 L 14 98.76 L 22 102.76 L 30 98.76 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="leftUp" d="M 22 39.24 L 30 55.24 L 22 51.24 L 14 55.24 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" opacity="0"></path><path class="rightSegment" d="M 62 37 L 62 115" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="rightDown" d="M 62 114.76 L 54 98.76 L 62 102.76 L 70 98.76 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10"></path><path class="rightUp" d="M 62 39.24 L 70 55.24 L 62 51.24 L 54 55.24 Z" fill="#000000" stroke="#000000" stroke-width="2" stroke-miterlimit="10" opacity="0"></path><circle class="agent" cx="22" cy="20" r="10" fill="hsl(57.4, 50%, 50%)" stroke="hsl(57.4, 40%, 40%)"></circle></svg></div></div><div class="robotpivot fragment" data-target="hexL2T" data-pivots="2,7/-120@R2,7 1,6/-120@R1,6 2,7/-120@R3,8 1,6/-120@R2,7 2,7/-120@R4,9 1,6/-120@R3,8 2,7/-120@R5,10 1,6/-120@R4,9 2,7/-120@R6,11 1,6/-120@R5,10 2,7/-120@R7,12 1,6/-120@R6,11"></div><div class="robotpivot fragment" data-target="hexL2T" data-pivots="12,13/-120@BL12,13/-120@BL11,14"></div><div class="robotpivot fragment" data-target="hexL2T" data-pivots="2,7/-120@R8,13/-120@BR9,14/-120@BL9,16/-120@BL8,17 1,6/-120@R7,12/-120@R8,13/-120@BR9,14/-120@BL9,16 2,7/120@TR7,18 12,13/-120@BL10,15/-120@L9,16/-120@L8,15/-120@BL7,14"></div><div class="fragment L2T" data-target="hexL2Tdiagram" data-step="0"></div><div class="robotpivot fragment" data-target="hexL2T" data-pivots="6,39/-120@R6,39/-120@TR7,40/-120@TR8,39/-120@R9,38 7,38/120@TR7,38 8,37/-120@R8,37/-120@BR9,38/-120@BL9,40/-120@BL8,41 7,38/-120@R7,36/-120@R8,37/-120@BR9,38/-120@BL9,40 8,37/-120@BL7,42 7,38/-120@BL8,41 8,37/-120@BL6,43 7,38/-120@BL7,42 8,37/-120@BL5,44 7,38/-120@BL6,43 8,37/-120@BL4,45 7,38/-120@BL5,44 8,37/-120@BL3,46 7,38/-120@BL4,45 8,37/-120@BL2,47 7,38/-120@BL3,46"></div></section><section><h2>Our Results</h2><ul><li>No forbidden patterns or extra robots</li></ul><p></p><table><tr><th>Model:</th><th>Restricted</th><th>Restricted + Leapfrog</th><th>Restricted + Leapfrog + Monkey</th></tr><tr><th>Hexagons</th><td>PSPACE-hard</td><td><svg width="225px" height="100px" viewBox="0 0 2.25 1"><rect width="100%" height="100%" fill="url(#hatch)"></rect></svg></td><td>Universal:<span style="font-size: 90%">$O(n^3)$ moves</span></td></tr><tr><th>Squares</th><td>PSPACE-hard</td><td>PSPACE-hard</td><td>PSPACE-hard</td></tr></table></section><section><h1 style="font-variant: small-caps">Token Swapping and Robot Pivoting</h1><hr><h4><u>Erik&nbsp;Demaine</u><span style="font-weight: normal">, MIT</span></h4><div class="columns r-stretch"><div class="column fill justify-content-center"><svg class="tokens" viewBox="-10 -10 370 170" style="padding-top:0.5rem"><line x1="50" y1="25" x2="100" y2="65"></line><line x1="50" y1="125" x2="100" y2="85"></line><line x1="150" y1="75" x2="200" y2="75"></line><line x1="300" y1="25" x2="250" y2="65"></line><line x1="300" y1="125" x2="250" y2="85"></line><rect class="t1" x="0" y="0" width="50" height="50"></rect><rect class="t2" x="0" y="100" width="50" height="50"></rect><rect class="t3" x="100" y="50" width="50" height="50"></rect><rect class="t4" x="200" y="50" width="50" height="50"></rect><rect class="t5" x="300" y="0" width="50" height="50"></rect><rect class="t6" x="300" y="100" width="50" height="50"></rect><circle class="t5" cx="25" cy="25" r="16"></circle><circle class="t1" cx="25" cy="125" r="16"></circle><circle class="t6" cx="125" cy="75" r="16"></circle><circle class="t4" cx="225" cy="75" r="16"></circle><circle class="t2" cx="325" cy="25" r="16"></circle><circle class="t3" cx="325" cy="125" r="16"></circle></svg><div class="tokenswap fragment" data-swaps="2,4 2,6 2,1 1,5 3,6 3,5 4,5"></div></div><div class="column fill robots" id="intro69" data-fragment-index="1">.....
+.OOO.
+.O...
+.OOO.
+.O.O.
+.OOO.
+.....</div></div><div class="robotpivot fragment" data-target="intro69" data-pivots="1,5/-180@2,6/-90@3,6/-180@4,6/-90@4,5/-90@4,4 1,5/-180@4,3/180@4,3 3,1/-180@3,1 1,5/-180@4,3 3,1/180@3,1 1,4/-90@2,5"></div></section></div></div><script>(function() {
+  var elt, i, len, ref;
+
+  renderFigures();
+
+  Reveal.initialize({
+    center: false,
+    slideNumber: true,
+    hash: true,
+    transition: 'none',
+    width: 1100,
+    height: 768,
+    minScale: 0.1,
+    maxScale: 10,
+    plugins: [RevealChalkboard],
+    chalkboard: {
+      background: ['none', 'node_modules/reveal.js-plugins/chalkboard/img/blackboard.png'],
+      boardmarkerWidth: 7,
+      colorButtons: true,
+      theme: 'whiteboard',
+      keyBindings: {
+        clear: {
+          keyCode: 187,
+          key: '=',
+          description: 'Clear drawings on slide'
+        }
+      }
+    }
+  });
+
+  renderMathInElement(document.body, {
+    delimiters: [
+      {
+        left: "$$",
+        right: "$$",
+        display: true
+      }, {
+        left: "$",
+        right: "$",
+        display: false
+      }
+    ]
+  });
+
+  document.querySelector('.fa-pen, .fa-pencil').innerHTML = '<svg height="1em" style="vertical-align:-0.125em" viewBox="0 0 512 512"><path fill="currentColor" d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"></path></svg>';
+
+  document.querySelector('.fa-pen-square').innerHTML = '<svg height="1em" style="vertical-align:-0.125em" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"></path></svg>';
+
+  ref = document.querySelectorAll('.fa-square');
+  for (i = 0, len = ref.length; i < len; i++) {
+    elt = ref[i];
+    elt.innerHTML = '<svg height="1em" style="vertical-align:-0.125em" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"></path></svg>';
+  }
+
+}).call(this);
+</script></body></html>
