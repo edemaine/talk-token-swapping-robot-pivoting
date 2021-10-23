@@ -55,17 +55,38 @@ Here's an overview of the individual files and what they do:
   rules that run Pug on `index.pug`.
 * [`index.pug`](index.pug): Top-level Pug file that calls all other files.
   Defines the top-level structure of the document, but has no slides.
-* [`slides.pug`](slides.pug): Slides and specific animations are defined here.
+* [`intro.pug`](intro.pug): Title slide
+  (included at the start and end of `index.pug`)
+* [`tokens.pug`](tokens.pug): First half of the slides, about token swapping.
+* [`robots.pug`](robots.pug): Second half of the slides, about pivoting robots.
+* [`figures.coffee`](figures.coffee): code to convert ASCII art of modular
+  robot configurations in `robots.pug` into SVG Tiler drawings.
+  Class `robots` indicates square-grid robots;
+  class `hexrobots` indicates hexagonal-grid robots.
 * [`tokenswap.coffee`](tokenswap.coffee): SVG.js-based code to implement
-  token-swapping animations, enabling `slides.pug` to define a triggerable
+  token-swapping animations, enabling `tokens.pug` to define a triggerable
   animation sequence on a slide with a single line:
   ```pug
   .tokenswap.fragment(data-swaps="4,3 4,2 4,1 3,2 3,1 2,1")
   ```
+* [`robotpivot.coffee`](robotpivot.coffee): SVG.js-based code to implement
+  robot-pivoting animations on top of SVG Tiler drawings from `figures.coffee`.
+  This enables `robots.pug` to define a triggerable animation sequence on a
+  slide with a single line:
+  ```pug
+  .robotpivot.fragment(data-target="id", data-pivots="1,5/-180@2,6/-90@3,6 3,1/-180@3,1")
+  ```
+  Here `data-pivots` gives the coordinates of a tile (such as `1,5` or `3,1`),
+  and uses `/angle@coords` to indicate pivoting around a single center.
+  In hexagonal examples, the centers can be specified as tile corners via e.g.
+  `TL1,5` for the top-left corner of hex with coordinates (1, 5).
 * [`index.styl`](index.styl): Some custom reveal.js styling,
   and specific SVG styling for the figures and animations.
   (Check out the cool glow/shadow effects!)
 * [`cayley4.png`](cayley4.png): [Image from Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_1,2,6_(1-based).png), licensed under CC-BY-SA
+* [`L2T_states.svg`](L2T_states.svg): Figure 15(a) from [this paper](https://arxiv.org/pdf/2012.07556.pdf)
+* [`degree1.svg`](degree1.svg): Figure 9 from [this paper](https://arxiv.org/pdf/2012.07556.pdf)
+* [`merge-example.svg`](merge-example.svg): Figure from a future version of [this paper](https://arxiv.org/pdf/2012.07556.pdf)
 
 ## Build Instructions
 
