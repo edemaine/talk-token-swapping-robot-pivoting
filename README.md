@@ -80,9 +80,14 @@ Here's an overview of the individual files and what they do:
   and uses `/angle@coords` to indicate pivoting around a single center.
   In hexagonal examples, the centers can be specified as tile corners via e.g.
   `TL1,5` for the top-left corner of hex with coordinates (1, 5).
+* [`gadgets.coffee`](gadgets.coffee): SVG.js-based code to implement a few
+  specific animations of traversing the locking 2-toggle gadget.
 * [`index.styl`](index.styl): Some custom reveal.js styling,
-  and specific SVG styling for the figures and animations.
-  (Check out the cool glow/shadow effects!)
+  and general tools for styling slides.
+* [`tokens.styl`](tokens.styl): Styling specific to token swapping,
+  including SVG figures.  (Check out the cool glow/shadow effects!)
+* [`robots.styl`](tokens.styl): Styling specific to robot pivoting,
+  including SVG figures.  (Check out the cool SVG animations!)
 * [`cayley4.png`](cayley4.png): [Image from Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Symmetric_group_4;_Cayley_graph_1,2,6_(1-based).png), licensed under CC-BY-SA
 * [`L2T_states.svg`](L2T_states.svg): Figure 15(a) from [this paper](https://arxiv.org/pdf/2012.07556.pdf)
 * [`degree1.svg`](degree1.svg): Figure 9 from [this paper](https://arxiv.org/pdf/2012.07556.pdf)
